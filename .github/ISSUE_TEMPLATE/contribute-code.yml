@@ -1,7 +1,7 @@
 name: Contribute code
 description: Propose an improvement to the blog app, tooling, automation, or reader experience before opening a pull request.
 title: "Code contribution: "
-labels: ["community", "enhancement"]
+labels: ["community", "enhancement", "code-contribution"]
 body:
   - type: markdown
     attributes:

@@ -1,7 +1,7 @@
 name: Suggest an article
 description: Request a topic or scenario you want to see explained on the blog.
 title: "Article request: "
-labels: ["community", "content"]
+labels: ["community", "content", "article-request"]
 body:
   - type: markdown
     attributes:

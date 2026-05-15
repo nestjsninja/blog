@@ -1,0 +1,43 @@
+- name: community
+  color: "7c3aed"
+  description: Community-driven requests and contribution intake.
+
+- name: content
+  color: "2563eb"
+  description: Article ideas, post fixes, and editorial work.
+
+- name: project-idea
+  color: "0f766e"
+  description: Real project examples that could become a post.
+
+- name: article-request
+  color: "0284c7"
+  description: Requested topics or scenarios for future articles.
+
+- name: post-fix
+  color: "b45309"
+  description: Corrections or updates for published blog posts.
+
+- name: code-contribution
+  color: "15803d"
+  description: Proposed code improvements for the blog project.
+
+- name: bug
+  color: "dc2626"
+  description: Something broken, outdated, or incorrect.
+
+- name: enhancement
+  color: "16a34a"
+  description: Improvements to the blog app or contributor workflow.
+
+- name: dependencies
+  color: "1d4ed8"
+  description: Dependency update pull requests.
+
+- name: npm
+  color: "b91c1c"
+  description: npm package dependency updates.
+
+- name: github-actions
+  color: "4338ca"
+  description: GitHub Actions dependency updates.

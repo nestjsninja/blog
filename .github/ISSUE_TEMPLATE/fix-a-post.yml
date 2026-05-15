@@ -1,7 +1,7 @@
 name: Fix a post
 description: Report a typo, broken link, outdated command, missing image, or unclear explanation in an existing article.
 title: "Post fix: "
-labels: ["community", "content", "bug"]
+labels: ["community", "content", "bug", "post-fix"]
 body:
   - type: markdown
     attributes:

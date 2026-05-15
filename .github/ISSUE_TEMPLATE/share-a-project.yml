@@ -1,7 +1,7 @@
 name: Share a project
 description: Suggest a real NestJS project, integration, architecture decision, or bug fix that could become an article.
 title: "Project idea: "
-labels: ["community", "content"]
+labels: ["community", "content", "project-idea"]
 body:
   - type: markdown
     attributes:
