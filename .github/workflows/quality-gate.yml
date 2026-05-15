@@ -26,6 +26,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -35,6 +37,14 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Generate baseline coverage
+        if: github.event_name == 'pull_request'
+        continue-on-error: true
+        run: |
+          git worktree add .baseline origin/${{ github.base_ref }}
+          npm ci --prefix .baseline
+          node scripts/coverage-report.mjs --cwd .baseline --json .coverage/baseline.json
 
       - name: Run quality gate
         run: npm run quality:gate

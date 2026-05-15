@@ -5,6 +5,9 @@ JSON-LD, sitemap, robots.txt, and manifest support.
 
 ## Development
 
+This project uses npm. Keep `package-lock.json` committed and do not add a
+second package-manager lockfile.
+
 ```bash
 npm install
 cp .env.example .env.local
@@ -83,10 +86,14 @@ The regular Next.js build is useful for local verification.
 `quality:gate` is the same command used by GitHub Actions. It checks:
 
 - every post has a `coverImage`
-- unit tests pass
+- unit tests pass and coverage is measured
 - ESLint passes
 - the production build passes
 - `npm audit --audit-level=high` passes
+
+On pull requests, GitHub Actions also generates coverage on the base branch and
+the quality gate summary shows a baseline/current/delta table for line, branch,
+and function coverage.
 
 ## Git Hooks
 
@@ -124,6 +131,9 @@ Framework preset: Next.js
 Build command: npx @cloudflare/next-on-pages@1
 Build output directory: .vercel/output/static
 ```
+
+Cloudflare should install with npm. The repo pins npm in `package.json` and only
+commits `package-lock.json`, so Cloudflare Pages should not try to run Yarn.
 
 Enable the `nodejs_compat` compatibility flag for both production and preview
 environments. The same flag is also declared in `wrangler.toml`.

@@ -2,6 +2,7 @@
   "name": "blog",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "npm@10.9.2",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,6 +12,7 @@
     "lint": "eslint",
     "prepare": "husky",
     "test": "node --test",
+    "coverage": "node scripts/coverage-report.mjs",
     "commit:check": "npm test && npm run lint && npm run build",
     "quality:gate": "node scripts/quality-gate.mjs"
   },
