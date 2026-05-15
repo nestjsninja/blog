@@ -48,12 +48,12 @@ export default async function PostPage({ params }: Params) {
   const content = await markdownToHtml(post.content);
 
   return (
-    <article className="mx-auto w-full max-w-3xl px-5 py-12 sm:py-16">
+    <article className="mx-auto w-full max-w-3xl px-5 py-12 text-zinc-100 sm:py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleJsonLd(post)) }}
       />
-      <Link href="/blog" className="text-sm font-medium text-teal-700 hover:text-teal-900">
+      <Link href="/blog" className="text-sm font-medium text-violet-300 hover:text-violet-100">
         Back to blog
       </Link>
 
@@ -62,18 +62,18 @@ export default async function PostPage({ params }: Params) {
           {post.tags?.map((tag) => (
             <span
               key={tag}
-              className="rounded-sm bg-zinc-100 px-2.5 py-1 text-xs font-medium text-zinc-700"
+              className="rounded-sm bg-violet-400/10 px-2.5 py-1 text-xs font-medium text-violet-200 ring-1 ring-violet-300/15"
             >
               {tag}
             </span>
           ))}
         </div>
-        <h1 className="mt-5 text-4xl font-semibold tracking-normal text-zinc-950 sm:text-5xl">
+        <h1 className="mt-5 text-4xl font-semibold tracking-normal text-white sm:text-5xl">
           {post.title}
         </h1>
-        <p className="mt-5 text-xl leading-8 text-zinc-600">{post.excerpt}</p>
+        <p className="mt-5 text-xl leading-8 text-zinc-400">{post.excerpt}</p>
 
-        <div className="mt-8 flex items-center gap-4 border-y border-zinc-200 py-5">
+        <div className="mt-8 flex items-center gap-4 border-y border-white/10 py-5">
           <Image
             src={post.author.picture}
             alt={post.author.name}
@@ -82,7 +82,7 @@ export default async function PostPage({ params }: Params) {
             className="rounded-full"
           />
           <div>
-            <p className="font-medium text-zinc-950">{post.author.name}</p>
+            <p className="font-medium text-white">{post.author.name}</p>
             <time className="text-sm text-zinc-500" dateTime={post.date}>
               {new Date(post.date).toLocaleDateString("en-US", {
                 year: "numeric",
@@ -93,7 +93,7 @@ export default async function PostPage({ params }: Params) {
           </div>
         </div>
 
-        <div className="relative mt-8 aspect-video overflow-hidden rounded-md bg-zinc-100">
+        <div className="relative mt-8 aspect-video overflow-hidden rounded-md bg-[#171026] ring-1 ring-white/10">
           <Image
             src={post.coverImage}
             alt={post.title}

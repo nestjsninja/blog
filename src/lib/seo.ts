@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-const SITE_NAME = "Henrique Weiand";
-const DEFAULT_TITLE = "Henrique Weiand | Notes on Software and Product";
+const SITE_NAME = "NestJS Ninja";
+const DEFAULT_TITLE = "NestJS Ninja | Backend Architecture Notes";
 const DEFAULT_DESCRIPTION =
-  "A markdown-powered blog about software engineering, Next.js, product thinking, and practical development workflows.";
+  "A markdown-powered blog about NestJS, backend architecture, TypeScript, and practical development workflows.";
 const DEFAULT_OG_IMAGE = {
   url: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop",
   width: 1200,

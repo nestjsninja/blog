@@ -1,5 +1,5 @@
 .markdown {
-  color: #27272a;
+  color: #d4d4d8;
   font-size: 1.0625rem;
   line-height: 1.85;
   margin-top: 3rem;
@@ -10,7 +10,7 @@
 }
 
 .markdown h2 {
-  color: #09090b;
+  color: #ffffff;
   font-size: 1.75rem;
   font-weight: 650;
   line-height: 1.25;
@@ -18,7 +18,7 @@
 }
 
 .markdown h3 {
-  color: #09090b;
+  color: #ffffff;
   font-size: 1.35rem;
   font-weight: 650;
   line-height: 1.35;
@@ -26,7 +26,7 @@
 }
 
 .markdown a {
-  color: #0f766e;
+  color: #c4b5fd;
   font-weight: 500;
   text-decoration: underline;
   text-underline-offset: 0.18em;
@@ -46,14 +46,15 @@
 }
 
 .markdown blockquote {
-  border-left: 4px solid #14b8a6;
-  color: #52525b;
+  border-left: 4px solid #8b5cf6;
+  color: #a1a1aa;
   font-style: italic;
   padding-left: 1rem;
 }
 
 .markdown pre {
-  background: #18181b;
+  background: #120d1f;
+  border: 1px solid rgb(255 255 255 / 0.1);
   border-radius: 0.375rem;
   color: #f4f4f5;
   font-size: 0.9rem;
@@ -70,9 +71,9 @@
 }
 
 .markdown :not(pre) > code {
-  background: #f4f4f5;
+  background: rgb(139 92 246 / 0.12);
   border-radius: 0.25rem;
-  color: #0f766e;
+  color: #ddd6fe;
   padding: 0.15rem 0.35rem;
 }
 
@@ -85,12 +86,12 @@
 
 .markdown th,
 .markdown td {
-  border: 1px solid #d4d4d8;
+  border: 1px solid rgb(255 255 255 / 0.14);
   padding: 0.65rem 0.8rem;
   text-align: left;
 }
 
 .markdown th {
-  background: #f4f4f5;
-  color: #18181b;
+  background: rgb(139 92 246 / 0.14);
+  color: #ffffff;
 }

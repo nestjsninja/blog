@@ -7,30 +7,30 @@ import { blogJsonLd, serializeJsonLd } from "@/lib/structured-data";
 export const metadata = buildPageMetadata({
   title: "Blog",
   description:
-    "Articles on software engineering, Next.js, React, TypeScript, and practical product development.",
+    "Articles on NestJS, TypeScript, backend architecture, and practical product development.",
   path: "/blog",
-  keywords: ["software engineering blog", "Next.js blog", "React", "TypeScript"],
+  keywords: ["NestJS blog", "backend architecture", "TypeScript", "Node.js"],
 });
 
 export default function BlogIndex() {
   const posts = getAllPosts();
 
   return (
-    <main className="mx-auto w-full max-w-5xl px-5 py-14 sm:py-20">
+    <main className="mx-auto w-full max-w-6xl px-5 py-14 text-zinc-100 sm:py-20">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(blogJsonLd(posts)) }}
       />
       <div className="mb-12 max-w-2xl">
-        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">
+        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-violet-300">
           Writing
         </p>
-        <h1 className="mt-3 text-4xl font-semibold tracking-normal text-zinc-950 sm:text-5xl">
+        <h1 className="mt-3 text-4xl font-semibold tracking-normal text-white sm:text-5xl">
           Blog
         </h1>
-        <p className="mt-4 text-lg leading-8 text-zinc-600">
-          Technical notes, implementation guides, and durable lessons from
-          building software.
+        <p className="mt-4 text-lg leading-8 text-zinc-400">
+          Technical notes, implementation guides, and durable lessons from NestJS
+          backend projects.
         </p>
       </div>
 
@@ -38,11 +38,11 @@ export default function BlogIndex() {
         {posts.map((post) => (
           <article
             key={post.slug}
-            className="grid gap-5 border-t border-zinc-200 pt-8 sm:grid-cols-[260px_1fr]"
+            className="grid gap-5 border-t border-white/10 pt-8 sm:grid-cols-[260px_1fr]"
           >
             <Link
               href={`/blog/${post.slug}`}
-              className="group relative aspect-video overflow-hidden rounded-md bg-zinc-100 sm:aspect-[4/3]"
+              className="group relative aspect-video overflow-hidden rounded-md bg-[#171026] ring-1 ring-white/10 sm:aspect-[4/3]"
               aria-label={post.title}
             >
               <Image
@@ -61,12 +61,12 @@ export default function BlogIndex() {
                   day: "numeric",
                 })}
               </time>
-              <h2 className="mt-2 text-2xl font-semibold tracking-normal text-zinc-950">
-                <Link href={`/blog/${post.slug}`} className="hover:text-teal-700">
+              <h2 className="mt-2 text-2xl font-semibold tracking-normal text-white">
+                <Link href={`/blog/${post.slug}`} className="hover:text-violet-300">
                   {post.title}
                 </Link>
               </h2>
-              <p className="mt-3 text-base leading-7 text-zinc-600">
+              <p className="mt-3 text-base leading-7 text-zinc-400">
                 {post.excerpt}
               </p>
               {post.tags?.length ? (
@@ -74,7 +74,7 @@ export default function BlogIndex() {
                   {post.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-sm bg-zinc-100 px-2.5 py-1 text-xs font-medium text-zinc-700"
+                      className="rounded-sm bg-violet-400/10 px-2.5 py-1 text-xs font-medium text-violet-200 ring-1 ring-violet-300/15"
                     >
                       {tag}
                     </span>

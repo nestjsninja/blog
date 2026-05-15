@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #18181b;
+  --background: #0b0714;
+  --foreground: #f8f7ff;
 }
 
 @theme inline {
@@ -19,6 +19,11 @@ body {
 }
 
 ::selection {
-  background: #ccfbf1;
-  color: #134e4a;
+  background: #8b5cf6;
+  color: #ffffff;
+}
+
+a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
 }
