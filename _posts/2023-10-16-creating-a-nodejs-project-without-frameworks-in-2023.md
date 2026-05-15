@@ -1,23 +1,23 @@
 ---
-title: "Creating a NodeJS project without frameworks in 2023"
-excerpt: "Hello fellow coders! Let's start with a few questions:"
-coverImage: "/blog-assets/creating-a-nodejs-project-without-frameworks-in-2023/among-us-logo-1.png"
-date: "2023-10-16T12:00:00.000Z"
+title: Creating a NodeJS project without frameworks in 2023
+excerpt: 'Hello fellow coders! Let''s start with a few questions:'
+coverImage: /blog-assets/creating-a-nodejs-project-without-frameworks-in-2023/cover.png
+date: '2023-10-16T12:00:00.000Z'
 author:
-  name: "Henrique Weiand"
-  picture: "/nestjs-ninja.png"
+  name: Henrique Weiand
+  picture: /nestjs-ninja.png
 ogImage:
-  url: "/blog-assets/creating-a-nodejs-project-without-frameworks-in-2023/among-us-logo-1.png"
+  url: /blog-assets/creating-a-nodejs-project-without-frameworks-in-2023/cover.png
 tags:
-  - "Fastify"
-  - "Github"
-  - "Node.js"
-  - "Patterns"
-  - "Prisma"
-  - "Tests"
-  - "Typescript"
-  - "Vitest"
-  - "auth"
+  - Fastify
+  - Github
+  - Node.js
+  - Patterns
+  - Prisma
+  - Tests
+  - Typescript
+  - Vitest
+  - auth
 ---
 Hello fellow coders! Let's start with a few questions:
 

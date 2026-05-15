@@ -1,18 +1,22 @@
 ---
-title: "How to Integrate Multiple Payment Gateways in NestJS (With Stripe Example)"
-excerpt: "NestJS-based payment gateway integration service. It provides a unified interface for processing payments through various payment processors such as Stripe, PayPal, and others. The service handles payment initialization, processing, and refunding, ensuring a seamless payment experience for users."
-coverImage: "/blog-assets/nestjs-payment-gateway-integration/screenshot-2025-01-21-at-18-54-04.png"
-date: "2025-01-22T12:00:00.000Z"
+title: "How to Integrate Multiple Payment Gateways in NestJS (With Stripe\_Example)"
+excerpt: >-
+  NestJS-based payment gateway integration service. It provides a unified
+  interface for processing payments through various payment processors such as
+  Stripe, PayPal, and others. The service handles payment initialization,
+  processing, and refunding, ensuring a seamless payment experience for users.
+coverImage: /blog-assets/nestjs-payment-gateway-integration/cover.png
+date: '2025-01-22T12:00:00.000Z'
 author:
-  name: "Henrique Weiand"
-  picture: "/nestjs-ninja.png"
+  name: Henrique Weiand
+  picture: /nestjs-ninja.png
 ogImage:
-  url: "/blog-assets/nestjs-payment-gateway-integration/screenshot-2025-01-21-at-18-54-04.png"
+  url: /blog-assets/nestjs-payment-gateway-integration/cover.png
 tags:
-  - "NestJS"
-  - "Node.js"
-  - "Payments"
-  - "Stripe"
+  - NestJS
+  - Node.js
+  - Payments
+  - Stripe
 ---
 One of the most common use cases that every project has is integrating and offering ways for the customers to pay for your software, which is quite important, isn't it? 
 

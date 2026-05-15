@@ -1,17 +1,24 @@
 ---
-title: "Unveiling The Software Developer Journey Navigating Challenges And New Technologies"
-excerpt: "Software development is a dynamic field, constantly evolving and presenting fresh challenges. It is a journey that demands continuous learning and adaptability. Have you ever wondered what it takes to navigate through th"
-coverImage: "/nestjs-ninja.png"
-date: "2023-10-05T12:00:00.000Z"
+title: >-
+  Unveiling The Software Developer Journey Navigating Challenges And New
+  Technologies
+excerpt: >-
+  Software development is a dynamic field, constantly evolving and presenting
+  fresh challenges. It is a journey that demands continuous learning and
+  adaptability. Have you ever wondered what it takes to navigate through th
+coverImage: >-
+  /blog-assets/unveiling-the-software-developer-journey-navigating-challenges-and-new-technologies/cover.png
+date: '2023-10-05T12:00:00.000Z'
 author:
-  name: "Henrique Weiand"
-  picture: "/nestjs-ninja.png"
+  name: Henrique Weiand
+  picture: /nestjs-ninja.png
 ogImage:
-  url: "/nestjs-ninja.png"
+  url: >-
+    /blog-assets/unveiling-the-software-developer-journey-navigating-challenges-and-new-technologies/cover.png
 tags:
-  - "Software Development"
-  - "Tech"
-  - "Web Dev"
+  - Software Development
+  - Tech
+  - Web Dev
 ---
 # **Unveiling The Software Developer Journey Navigating Challenges And New Technologies**
 

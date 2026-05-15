@@ -1,22 +1,28 @@
 ---
-title: "Implementing Kubernetes Jobs with NestJS and nest-commander: A Practical Guide (Ex. implementation with Ticketmaster)"
-excerpt: "Implementing Kubernetes Jobs with NestJS and nest-commander: A Practical Guide (Ex. implementation with ticketmaster)"
-coverImage: "/nestjs-ninja.png"
-date: "2025-02-18T12:00:00.000Z"
+title: >-
+  Implementing Kubernetes Jobs with NestJS and nest-commander: A Practical Guide
+  (Ex. implementation with Ticketmaster)
+excerpt: >-
+  Implementing Kubernetes Jobs with NestJS and nest-commander: A Practical Guide
+  (Ex. implementation with ticketmaster)
+coverImage: >-
+  /blog-assets/implementing-kubernetes-jobs-with-nestjs-and-nest-commander-a-practical-guide-ex-implement/cover.png
+date: '2025-02-18T12:00:00.000Z'
 author:
-  name: "Henrique Weiand"
-  picture: "/nestjs-ninja.png"
+  name: Henrique Weiand
+  picture: /nestjs-ninja.png
 ogImage:
-  url: "/nestjs-ninja.png"
+  url: >-
+    /blog-assets/implementing-kubernetes-jobs-with-nestjs-and-nest-commander-a-practical-guide-ex-implement/cover.png
 tags:
-  - "CLI"
-  - "K8S"
-  - "Nest"
-  - "Nest-Commander"
-  - "NestJS"
-  - "Node.js"
-  - "TicketMaster"
-  - "TypeORM"
+  - CLI
+  - K8S
+  - Nest
+  - Nest-Commander
+  - NestJS
+  - Node.js
+  - TicketMaster
+  - TypeORM
 ---
 Hey there! Ever found yourself knee-deep in building NestJS applications and thought, “Man, I wish I could bring this awesome structure to my command-line tools”? Well, you’re in luck! The [nest-commander package](https://docs.nestjs.com/recipes/nest-commander) does just that, letting you craft CLI applications with the same NestJS flair you know and love.
 

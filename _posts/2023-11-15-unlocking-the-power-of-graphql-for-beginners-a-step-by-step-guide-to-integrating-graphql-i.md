@@ -1,20 +1,24 @@
 ---
-title: "Unlocking the Power of GraphQL for Beginners: A Step-by-Step Guide to Integrating GraphQL into Your Existing Project"
-excerpt: "Hello fellow coders!"
-coverImage: "/blog-assets/unlocking-the-power-of-graphql-for-beginners-a-step-by-step-guide-to-integrating-graphql-i/screen-shot-2023-11-15-at-14-36-07.png"
-date: "2023-11-15T12:00:00.000Z"
+title: >-
+  Unlocking the Power of GraphQL for Beginners: A Step-by-Step Guide to
+  Integrating GraphQL into Your Existing Project
+excerpt: Hello fellow coders!
+coverImage: >-
+  /blog-assets/unlocking-the-power-of-graphql-for-beginners-a-step-by-step-guide-to-integrating-graphql-i/cover.png
+date: '2023-11-15T12:00:00.000Z'
 author:
-  name: "Henrique Weiand"
-  picture: "/nestjs-ninja.png"
+  name: Henrique Weiand
+  picture: /nestjs-ninja.png
 ogImage:
-  url: "/blog-assets/unlocking-the-power-of-graphql-for-beginners-a-step-by-step-guide-to-integrating-graphql-i/screen-shot-2023-11-15-at-14-36-07.png"
+  url: >-
+    /blog-assets/unlocking-the-power-of-graphql-for-beginners-a-step-by-step-guide-to-integrating-graphql-i/cover.png
 tags:
-  - "GraphQL"
-  - "Jest"
-  - "NestJS"
-  - "SWC"
-  - "Typescript"
-  - "openAI"
+  - GraphQL
+  - Jest
+  - NestJS
+  - SWC
+  - Typescript
+  - openAI
 ---
 Hello fellow coders! 
 

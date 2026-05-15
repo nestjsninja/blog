@@ -1,20 +1,21 @@
 ---
-title: "Creating a TinyMCE 6 Plugin with ReactJS and Typescript"
-excerpt: "Hi dear reader!"
-coverImage: "/blog-assets/creating-a-tinymce-6-plugin-with-reactjs-and-typescript/untitled.png"
-date: "2023-01-09T12:00:00.000Z"
+title: Creating a TinyMCE 6 Plugin with ReactJS and Typescript
+excerpt: Hi dear reader!
+coverImage: /blog-assets/creating-a-tinymce-6-plugin-with-reactjs-and-typescript/cover.png
+date: '2023-01-09T12:00:00.000Z'
 author:
-  name: "Henrique Weiand"
-  picture: "/nestjs-ninja.png"
+  name: Henrique Weiand
+  picture: /nestjs-ninja.png
 ogImage:
-  url: "/blog-assets/creating-a-tinymce-6-plugin-with-reactjs-and-typescript/untitled.png"
+  url: >-
+    /blog-assets/creating-a-tinymce-6-plugin-with-reactjs-and-typescript/cover.png
 tags:
-  - "React.js"
-  - "Software Development"
-  - "Tech"
-  - "TinyMCE"
-  - "Typescript"
-  - "Web Dev"
+  - React.js
+  - Software Development
+  - Tech
+  - TinyMCE
+  - Typescript
+  - Web Dev
 ---
 Hi dear reader!
 

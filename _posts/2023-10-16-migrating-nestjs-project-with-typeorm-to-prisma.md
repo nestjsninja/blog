@@ -1,22 +1,25 @@
 ---
-title: "Migrating NestJS project with TypeORM to Prisma"
-excerpt: "Hello fellow coders! Today we are going to replace TypeORM with Prisma inside a simple previous project that we built, it’s gonna be simple and quick, so let’s get started!"
-coverImage: "/blog-assets/migrating-nestjs-project-with-typeorm-to-prisma/untitled.png"
-date: "2023-10-16T12:00:00.000Z"
+title: Migrating NestJS project with TypeORM to Prisma
+excerpt: >-
+  Hello fellow coders! Today we are going to replace TypeORM with Prisma inside
+  a simple previous project that we built, it’s gonna be simple and quick, so
+  let’s get started!
+coverImage: /blog-assets/migrating-nestjs-project-with-typeorm-to-prisma/cover.png
+date: '2023-10-16T12:00:00.000Z'
 author:
-  name: "Henrique Weiand"
-  picture: "/nestjs-ninja.png"
+  name: Henrique Weiand
+  picture: /nestjs-ninja.png
 ogImage:
-  url: "/blog-assets/migrating-nestjs-project-with-typeorm-to-prisma/untitled.png"
+  url: /blog-assets/migrating-nestjs-project-with-typeorm-to-prisma/cover.png
 tags:
-  - "Jest"
-  - "NestJS"
-  - "Node.js"
-  - "Passion Economy"
-  - "SWC"
-  - "Tests"
-  - "Typescript"
-  - "auth"
+  - Jest
+  - NestJS
+  - Node.js
+  - Passion Economy
+  - SWC
+  - Tests
+  - Typescript
+  - auth
 ---
 Hello fellow coders! Today we are going to replace TypeORM with Prisma inside a simple previous project that we built, it’s gonna be simple and quick, so let’s get started!
 

@@ -1,18 +1,21 @@
 ---
-title: "Real-time chat with NestJS and Socket.io"
-excerpt: "Real-time communication is an intriguing topic, and I wanted to share my thoughts on it. I came across one of my old blog posts about micro frontends, where I developed an interface for a micro frontend chat feature that"
-coverImage: "/blog-assets/real-time-chat-with-nestjs-and-socket-io/kapture-2025-01-24-at-14-45-12.gif"
-date: "2025-01-24T12:00:00.000Z"
+title: Real-time chat with NestJS and Socket.io
+excerpt: >-
+  Real-time communication is an intriguing topic, and I wanted to share my
+  thoughts on it. I came across one of my old blog posts about micro frontends,
+  where I developed an interface for a micro frontend chat feature that
+coverImage: /blog-assets/real-time-chat-with-nestjs-and-socket-io/cover.png
+date: '2025-01-24T12:00:00.000Z'
 author:
-  name: "Henrique Weiand"
-  picture: "/nestjs-ninja.png"
+  name: Henrique Weiand
+  picture: /nestjs-ninja.png
 ogImage:
-  url: "/blog-assets/real-time-chat-with-nestjs-and-socket-io/kapture-2025-01-24-at-14-45-12.gif"
+  url: /blog-assets/real-time-chat-with-nestjs-and-socket-io/cover.png
 tags:
-  - "NestJS"
-  - "Socket.io"
-  - "chat"
-  - "real-time"
+  - NestJS
+  - Socket.io
+  - chat
+  - real-time
 ---
 Real-time communication is an intriguing topic, and I wanted to share my thoughts on it. I came across one of my old blog posts about micro frontends, where I developed an interface for a micro frontend chat feature that was shared across two other pages. In that project, I focused solely on the front end and interface without addressing the backend or ensuring everything functioned properly. So, what did I do next? I implemented the backend using NestJS with [Socket.io](http://Socket.io) to facilitate chat functionality among the different pages utilizing the micro frontend chat.
 

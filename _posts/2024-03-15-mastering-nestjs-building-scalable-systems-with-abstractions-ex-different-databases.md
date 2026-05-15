@@ -1,21 +1,28 @@
 ---
-title: "Mastering NestJS: Building Scalable Systems with Abstractions, ex: different databases"
-excerpt: "Hello, developers! Welcome to the second part of our NestJS + Clean Architecture + DDD series. In this post, we'll delve into abstractions and explore how they can be used to create scalable systems that are agnostic to"
-coverImage: "/blog-assets/mastering-nestjs-building-scalable-systems-with-abstractions-ex-different-databases/screen-shot-2024-03-09-at-15-37-40.png"
-date: "2024-03-15T12:00:00.000Z"
+title: >-
+  Mastering NestJS: Building Scalable Systems with Abstractions, ex: different
+  databases
+excerpt: >-
+  Hello, developers! Welcome to the second part of our NestJS + Clean
+  Architecture + DDD series. In this post, we'll delve into abstractions and
+  explore how they can be used to create scalable systems that are agnostic to
+coverImage: >-
+  /blog-assets/mastering-nestjs-building-scalable-systems-with-abstractions-ex-different-databases/cover.png
+date: '2024-03-15T12:00:00.000Z'
 author:
-  name: "Henrique Weiand"
-  picture: "/nestjs-ninja.png"
+  name: Henrique Weiand
+  picture: /nestjs-ninja.png
 ogImage:
-  url: "/blog-assets/mastering-nestjs-building-scalable-systems-with-abstractions-ex-different-databases/screen-shot-2024-03-09-at-15-37-40.png"
+  url: >-
+    /blog-assets/mastering-nestjs-building-scalable-systems-with-abstractions-ex-different-databases/cover.png
 tags:
-  - "Clean Architecture"
-  - "Domain Driven Design"
-  - "Ecommerce"
-  - "Mongo"
-  - "NestJS"
-  - "Postgres"
-  - "Software Development"
+  - Clean Architecture
+  - Domain Driven Design
+  - Ecommerce
+  - Mongo
+  - NestJS
+  - Postgres
+  - Software Development
 ---
 Hello, developers! Welcome to the second part of our NestJS + Clean Architecture + DDD series. In this post, we'll delve into abstractions and explore how they can be used to create scalable systems that are agnostic to any technology. We'll use Mongo and Postgres databases as examples to demonstrate this. The goal is to provide strategies that can elevate your application to the next level.
 

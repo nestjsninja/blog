@@ -1,19 +1,22 @@
 ---
-title: "Questions generator with NestJS and OpenAI"
-excerpt: "Hello fellow coders! This time we are going to have a different post, I am not going to focus on Nestjs technical details instead, I'm going to explain a bit more different concepts than those that we've already seen on"
-coverImage: "/blog-assets/questions-generator-with-nestjs-and-openai/untitled.png"
-date: "2023-11-06T12:00:00.000Z"
+title: Questions generator with NestJS and OpenAI
+excerpt: >-
+  Hello fellow coders! This time we are going to have a different post, I am not
+  going to focus on Nestjs technical details instead, I'm going to explain a bit
+  more different concepts than those that we've already seen on
+coverImage: /blog-assets/questions-generator-with-nestjs-and-openai/cover.png
+date: '2023-11-06T12:00:00.000Z'
 author:
-  name: "Henrique Weiand"
-  picture: "/nestjs-ninja.png"
+  name: Henrique Weiand
+  picture: /nestjs-ninja.png
 ogImage:
-  url: "/blog-assets/questions-generator-with-nestjs-and-openai/untitled.png"
+  url: /blog-assets/questions-generator-with-nestjs-and-openai/cover.png
 tags:
-  - "Jest"
-  - "NestJS"
-  - "SWC"
-  - "Typescript"
-  - "openAI"
+  - Jest
+  - NestJS
+  - SWC
+  - Typescript
+  - openAI
 ---
 Hello fellow coders! This time we are going to have a different post, I am not going to focus on Nestjs technical details instead, I'm going to explain a bit more different concepts than those that we've already seen on the other blog posts, so if you haven't had the chances to check them out, please access
 

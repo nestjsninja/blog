@@ -1,21 +1,26 @@
 ---
-title: "Authentication part 3 using NestJS and Postgres database neon.tech"
-excerpt: "Hello fellow coders! Let's continue our series of NestJS auth flow implementations, and today we are going to add a database integration to keep users saved basically to work with the auth module."
-coverImage: "/blog-assets/authentication-part-3-using-nestjs-and-postgres-database-neon-tech/screen-shot-2023-10-07-at-16-24-08.png"
-date: "2023-10-07T12:00:00.000Z"
+title: Authentication part 3 using NestJS and Postgres database neon.tech
+excerpt: >-
+  Hello fellow coders! Let's continue our series of NestJS auth flow
+  implementations, and today we are going to add a database integration to keep
+  users saved basically to work with the auth module.
+coverImage: >-
+  /blog-assets/authentication-part-3-using-nestjs-and-postgres-database-neon-tech/cover.png
+date: '2023-10-07T12:00:00.000Z'
 author:
-  name: "Henrique Weiand"
-  picture: "/nestjs-ninja.png"
+  name: Henrique Weiand
+  picture: /nestjs-ninja.png
 ogImage:
-  url: "/blog-assets/authentication-part-3-using-nestjs-and-postgres-database-neon-tech/screen-shot-2023-10-07-at-16-24-08.png"
+  url: >-
+    /blog-assets/authentication-part-3-using-nestjs-and-postgres-database-neon-tech/cover.png
 tags:
-  - "NestJS"
-  - "Node.js"
-  - "Passion Economy"
-  - "SWC"
-  - "Typescript"
-  - "Vercel"
-  - "auth"
+  - NestJS
+  - Node.js
+  - Passion Economy
+  - SWC
+  - Typescript
+  - Vercel
+  - auth
 ---
 Hello fellow coders! Let's continue our series of NestJS auth flow implementations, and today we are going to add a database integration to keep users saved basically to work with the auth module. 
 

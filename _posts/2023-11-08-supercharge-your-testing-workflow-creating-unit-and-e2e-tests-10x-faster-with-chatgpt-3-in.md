@@ -1,19 +1,26 @@
 ---
-title: "Supercharge Your Testing Workflow: Creating Unit and E2E Tests 10x Faster with ChatGPT-3 Inside NestJS"
-excerpt: "Hello fellow coders! I have a polemic topic to talk about today, it is “using AI to create the unit and e2e tests” and how it can improve the velocity of writing tests!!!"
-coverImage: "/blog-assets/supercharge-your-testing-workflow-creating-unit-and-e2e-tests-10x-faster-with-chatgpt-3-in/ai.gif"
-date: "2023-11-08T12:00:00.000Z"
+title: >-
+  Supercharge Your Testing Workflow: Creating Unit and E2E Tests 10x Faster with
+  ChatGPT-3 Inside NestJS
+excerpt: >-
+  Hello fellow coders! I have a polemic topic to talk about today, it is “using
+  AI to create the unit and e2e tests” and how it can improve the velocity of
+  writing tests!!!
+coverImage: >-
+  /blog-assets/supercharge-your-testing-workflow-creating-unit-and-e2e-tests-10x-faster-with-chatgpt-3-in/cover.png
+date: '2023-11-08T12:00:00.000Z'
 author:
-  name: "Henrique Weiand"
-  picture: "/nestjs-ninja.png"
+  name: Henrique Weiand
+  picture: /nestjs-ninja.png
 ogImage:
-  url: "/blog-assets/supercharge-your-testing-workflow-creating-unit-and-e2e-tests-10x-faster-with-chatgpt-3-in/ai.gif"
+  url: >-
+    /blog-assets/supercharge-your-testing-workflow-creating-unit-and-e2e-tests-10x-faster-with-chatgpt-3-in/cover.png
 tags:
-  - "Jest"
-  - "NestJS"
-  - "SWC"
-  - "Typescript"
-  - "openAI"
+  - Jest
+  - NestJS
+  - SWC
+  - Typescript
+  - openAI
 ---
 Hello fellow coders! I have a polemic topic to talk about today, it is “using AI to create the unit and e2e tests” and how it can improve the velocity of writing tests!!!
 

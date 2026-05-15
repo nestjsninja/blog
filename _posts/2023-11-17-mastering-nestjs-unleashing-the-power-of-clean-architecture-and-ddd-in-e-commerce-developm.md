@@ -1,21 +1,28 @@
 ---
-title: "Mastering NestJS: Unleashing the Power of Clean Architecture and DDD in E-commerce Development — part 1"
-excerpt: "Hello, dev! Let's start one more sequence of exciting technical posts related to the NestJS ecosystem, and in this sequence, I am going to review and exercise with you concepts like:"
-coverImage: "/blog-assets/mastering-nestjs-unleashing-the-power-of-clean-architecture-and-ddd-in-e-commerce-developm/screen-shot-2024-03-09-at-15-51-23.png"
-date: "2023-11-17T12:00:00.000Z"
+title: >-
+  Mastering NestJS: Unleashing the Power of Clean Architecture and DDD in
+  E-commerce Development — part 1
+excerpt: >-
+  Hello, dev! Let's start one more sequence of exciting technical posts related
+  to the NestJS ecosystem, and in this sequence, I am going to review and
+  exercise with you concepts like:
+coverImage: >-
+  /blog-assets/mastering-nestjs-unleashing-the-power-of-clean-architecture-and-ddd-in-e-commerce-developm/cover.png
+date: '2023-11-17T12:00:00.000Z'
 author:
-  name: "Henrique Weiand"
-  picture: "/nestjs-ninja.png"
+  name: Henrique Weiand
+  picture: /nestjs-ninja.png
 ogImage:
-  url: "/blog-assets/mastering-nestjs-unleashing-the-power-of-clean-architecture-and-ddd-in-e-commerce-developm/screen-shot-2024-03-09-at-15-51-23.png"
+  url: >-
+    /blog-assets/mastering-nestjs-unleashing-the-power-of-clean-architecture-and-ddd-in-e-commerce-developm/cover.png
 tags:
-  - "Clean Architecture"
-  - "Domain Driven Design"
-  - "Ecommerce"
-  - "Mongo"
-  - "NestJS"
-  - "Postgres"
-  - "Software Development"
+  - Clean Architecture
+  - Domain Driven Design
+  - Ecommerce
+  - Mongo
+  - NestJS
+  - Postgres
+  - Software Development
 ---
 Hello, dev! Let's start one more sequence of exciting technical posts related to the NestJS ecosystem, and in this sequence, I am going to review and exercise with you concepts like:
 

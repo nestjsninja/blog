@@ -1,17 +1,22 @@
 ---
-title: "Creating a configuration module like a specialist with Zod inside NestJS"
-excerpt: "Hello fellow coders! Today we are going to talk about something simple that basically everybody and every project does, which is using ENVs inside a project, it can be database credentials, project port, name of queue, o"
-coverImage: "/blog-assets/creating-a-configuration-module-like-a-specialist-with-zod-inside-nestjs/screen-shot-2023-10-10-at-19-02-49.png"
-date: "2023-10-05T12:00:00.000Z"
+title: "Creating a configuration module like a specialist with Zod inside\_NestJS"
+excerpt: >-
+  Hello fellow coders! Today we are going to talk about something simple that
+  basically everybody and every project does, which is using ENVs inside a
+  project, it can be database credentials, project port, name of queue, o
+coverImage: >-
+  /blog-assets/creating-a-configuration-module-like-a-specialist-with-zod-inside-nestjs/cover.png
+date: '2023-10-05T12:00:00.000Z'
 author:
-  name: "Henrique Weiand"
-  picture: "/nestjs-ninja.png"
+  name: Henrique Weiand
+  picture: /nestjs-ninja.png
 ogImage:
-  url: "/blog-assets/creating-a-configuration-module-like-a-specialist-with-zod-inside-nestjs/screen-shot-2023-10-10-at-19-02-49.png"
+  url: >-
+    /blog-assets/creating-a-configuration-module-like-a-specialist-with-zod-inside-nestjs/cover.png
 tags:
-  - "Software Development"
-  - "Tech"
-  - "Web Dev"
+  - Software Development
+  - Tech
+  - Web Dev
 ---
 Hello fellow coders! Today we are going to talk about something simple that basically everybody and every project does, which is using ENVs inside a project, it can be database credentials, project port, name of queue, or whatever else. 
 

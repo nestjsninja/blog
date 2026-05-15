@@ -13,14 +13,24 @@ export default function manifest(): MetadataRoute.Manifest {
     scope: "/",
     display: "standalone",
     orientation: "any",
-    background_color: "#ffffff",
-    theme_color: "#0f766e",
+    background_color: "#0b0714",
+    theme_color: "#0b0714",
     categories: ["technology", "developer tools", "education"],
     icons: [
       {
         src: "/favicon.ico",
         sizes: "48x48",
         type: "image/x-icon",
+      },
+      {
+        src: "/icon-192.png",
+        sizes: "192x192",
+        type: "image/png",
+      },
+      {
+        src: "/icon-512.png",
+        sizes: "512x512",
+        type: "image/png",
       },
     ],
   };

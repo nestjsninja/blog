@@ -1,24 +1,27 @@
 ---
-title: "Currency conversion async"
-excerpt: "Hi dear reader! This is one more project I did to practice a few technologies, so you'll see NestJS, NextJS, SQS, Tests, and MongoDB, all exciting technologies! I'm sure you'll enjoy this post and project as much as I di"
-coverImage: "/blog-assets/currency-conversion-async/giphy.gif"
-date: "2023-02-11T12:00:00.000Z"
+title: Currency conversion async
+excerpt: >-
+  Hi dear reader! This is one more project I did to practice a few technologies,
+  so you'll see NestJS, NextJS, SQS, Tests, and MongoDB, all exciting
+  technologies! I'm sure you'll enjoy this post and project as much as I di
+coverImage: /blog-assets/currency-conversion-async/cover.png
+date: '2023-02-11T12:00:00.000Z'
 author:
-  name: "Henrique Weiand"
-  picture: "/nestjs-ninja.png"
+  name: Henrique Weiand
+  picture: /nestjs-ninja.png
 ogImage:
-  url: "/blog-assets/currency-conversion-async/giphy.gif"
+  url: /blog-assets/currency-conversion-async/cover.png
 tags:
-  - "Docker"
-  - "Jest"
-  - "LocalStack"
-  - "NestJS"
-  - "NextJS"
-  - "Node.js"
-  - "SQS"
-  - "Typescript"
-  - "Zod"
-  - "react-hook-form"
+  - Docker
+  - Jest
+  - LocalStack
+  - NestJS
+  - NextJS
+  - Node.js
+  - SQS
+  - Typescript
+  - Zod
+  - react-hook-form
 ---
 # Introduction
 

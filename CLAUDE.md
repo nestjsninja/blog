@@ -85,6 +85,45 @@ available notes and mention any assumptions in the final response.
 
 Posts are Markdown files in `_posts`.
 
+### Post Voice and Tone
+
+When drafting, rewriting, or expanding blog posts, match Henrique's existing
+NestJS Ninja tone:
+
+- Write like a developer explaining a project they actually built, not like a
+  detached documentation page.
+- Use a conversational first-person voice where it helps: "I decided", "I am
+  going to", "in this example", "let's start", "before we continue".
+- Keep the article practical and implementation-led. Prefer concrete setup
+  steps, commands, files, modules, services, and code flow over abstract theory.
+- Start with a short human intro that explains why the topic matters or why the
+  project was built, then move quickly into the target, setup, or architecture.
+- Use simple section titles such as "Starting point", "Setting the project up",
+  "Creating the tests", "Technical implementation", "Frontend", "Backend", and
+  "Conclusion".
+- Keep explanations friendly and direct. It is okay to say "by the way", "just
+  to let you know", or "before we start" when it makes the tutorial feel natural.
+- Include links to official docs, repositories, and related previous posts when
+  they help the reader continue.
+- Call out important context before commands, especially required services,
+  environment variables, Docker containers, databases, queues, or external APIs.
+- Prefer short paragraphs and bullet lists for requirements, features, and
+  takeaways.
+- Preserve the author's light enthusiasm for learning and experimentation, but
+  avoid marketing copy, hype, or generic AI-sounding summaries.
+- Do not over-polish the voice into corporate English. Keep it clear, technical,
+  and personal, while fixing grammar that would distract the reader.
+
+Typical article flow:
+
+1. Friendly intro: what we are building or practicing.
+2. Target/goal: what the reader will have at the end.
+3. Project/repository links when available.
+4. Setup: dependencies, config files, environment, Docker/services.
+5. Implementation: explain modules, classes, methods, and data flow.
+6. Verification: commands, tests, screenshots, or expected behavior.
+7. Conclusion: practical takeaways and what could come next.
+
 Filename format:
 
 ```text

@@ -1,22 +1,27 @@
 ---
-title: "Applying unit tests on NestJS with Jest and GitHub Actions"
-excerpt: "Hello fellow coders! In this post we are still going to talk about tests, but, instead of e2e we are going to implement unit tests, I’d say they are kind of siblings, however, each one does different things, and they hav"
-coverImage: "/blog-assets/applying-unit-tests-on-nestjs-with-jest-and-github-actions/untitled.png"
-date: "2023-10-16T12:00:00.000Z"
+title: Applying unit tests on NestJS with Jest and GitHub Actions
+excerpt: >-
+  Hello fellow coders! In this post we are still going to talk about tests, but,
+  instead of e2e we are going to implement unit tests, I’d say they are kind of
+  siblings, however, each one does different things, and they hav
+coverImage: >-
+  /blog-assets/applying-unit-tests-on-nestjs-with-jest-and-github-actions/cover.png
+date: '2023-10-16T12:00:00.000Z'
 author:
-  name: "Henrique Weiand"
-  picture: "/nestjs-ninja.png"
+  name: Henrique Weiand
+  picture: /nestjs-ninja.png
 ogImage:
-  url: "/blog-assets/applying-unit-tests-on-nestjs-with-jest-and-github-actions/untitled.png"
+  url: >-
+    /blog-assets/applying-unit-tests-on-nestjs-with-jest-and-github-actions/cover.png
 tags:
-  - "Jest"
-  - "NestJS"
-  - "Node.js"
-  - "Passion Economy"
-  - "SWC"
-  - "Tests"
-  - "Typescript"
-  - "auth"
+  - Jest
+  - NestJS
+  - Node.js
+  - Passion Economy
+  - SWC
+  - Tests
+  - Typescript
+  - auth
 ---
 Hello fellow coders! In this post we are still going to talk about tests, but, instead of e2e we are going to implement `unit tests`, I’d say they are kind of siblings, however, each one does different things, and they have a taste in common, but they delivery value on their way. Ok! I will stop playing with the concept and focus on the details.
 

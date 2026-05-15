@@ -1,17 +1,21 @@
 ---
-title: "Empowering Language Learning with NestJS, NextJS, Vercel, and Neon.tech: A Tech-Infused Journey"
-excerpt: "Hi everybody, how’s it going?"
-coverImage: "/nestjs-ninja.png"
-date: "2024-03-08T12:00:00.000Z"
+title: >-
+  Empowering Language Learning with NestJS, NextJS, Vercel, and Neon.tech: A
+  Tech-Infused Journey
+excerpt: 'Hi everybody, how’s it going?'
+coverImage: >-
+  /blog-assets/empowering-language-learning-with-nestjs-nextjs-vercel-and-neon-tech-a-tech-infused-journe/cover.png
+date: '2024-03-08T12:00:00.000Z'
 author:
-  name: "Henrique Weiand"
-  picture: "/nestjs-ninja.png"
+  name: Henrique Weiand
+  picture: /nestjs-ninja.png
 ogImage:
-  url: "/nestjs-ninja.png"
+  url: >-
+    /blog-assets/empowering-language-learning-with-nestjs-nextjs-vercel-and-neon-tech-a-tech-infused-journe/cover.png
 tags:
-  - "NestJS"
-  - "NextJS"
-  - "Vercel"
+  - NestJS
+  - NextJS
+  - Vercel
 ---
 Hi everybody, how’s it going? 
 

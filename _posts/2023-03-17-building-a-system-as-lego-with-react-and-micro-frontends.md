@@ -1,20 +1,24 @@
 ---
-title: "Building a system as lego with react and micro frontends"
-excerpt: "Hey! Let's talk, this time, about frontend and one cool approach that I have seen more and more often lately. It is called micro frontends."
-coverImage: "/blog-assets/building-a-system-as-lego-with-react-and-micro-frontends/screen-shot-2023-03-20-at-21-23-37.png"
-date: "2023-03-17T12:00:00.000Z"
+title: Building a system as lego with react and micro frontends
+excerpt: >-
+  Hey! Let's talk, this time, about frontend and one cool approach that I have
+  seen more and more often lately. It is called micro frontends.
+coverImage: >-
+  /blog-assets/building-a-system-as-lego-with-react-and-micro-frontends/cover.png
+date: '2023-03-17T12:00:00.000Z'
 author:
-  name: "Henrique Weiand"
-  picture: "/nestjs-ninja.png"
+  name: Henrique Weiand
+  picture: /nestjs-ninja.png
 ogImage:
-  url: "/blog-assets/building-a-system-as-lego-with-react-and-micro-frontends/screen-shot-2023-03-20-at-21-23-37.png"
+  url: >-
+    /blog-assets/building-a-system-as-lego-with-react-and-micro-frontends/cover.png
 tags:
-  - "Micro frontends"
-  - "React.js"
-  - "Software Development"
-  - "Tech"
-  - "Typescript"
-  - "Web Dev"
+  - Micro frontends
+  - React.js
+  - Software Development
+  - Tech
+  - Typescript
+  - Web Dev
 ---
 Hey! Let's talk, this time, about frontend and one cool approach that I have seen more and more often lately. It is called `micro frontends`.
 

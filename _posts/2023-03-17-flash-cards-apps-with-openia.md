@@ -1,24 +1,27 @@
 ---
-title: "Flash-cards apps with OpenIA"
-excerpt: "Hi guys! Let’s start another technical post and this time I did something that I really enjoyed, it was an App that uses the famous OpeanIA, and the best part about everything, this app is a Flashcard app, so you can use"
-coverImage: "/blog-assets/flash-cards-apps-with-openia/screen-shot-2023-05-10-at-20-07-15.png"
-date: "2023-03-17T12:00:00.000Z"
+title: Flash-cards apps with OpenIA
+excerpt: >-
+  Hi guys! Let’s start another technical post and this time I did something that
+  I really enjoyed, it was an App that uses the famous OpeanIA, and the best
+  part about everything, this app is a Flashcard app, so you can use
+coverImage: /blog-assets/flash-cards-apps-with-openia/cover.png
+date: '2023-03-17T12:00:00.000Z'
 author:
-  name: "Henrique Weiand"
-  picture: "/nestjs-ninja.png"
+  name: Henrique Weiand
+  picture: /nestjs-ninja.png
 ogImage:
-  url: "/blog-assets/flash-cards-apps-with-openia/screen-shot-2023-05-10-at-20-07-15.png"
+  url: /blog-assets/flash-cards-apps-with-openia/cover.png
 tags:
-  - "Cloud function"
-  - "Expo"
-  - "Firebase"
-  - "GCP"
-  - "Native-base"
-  - "React-Native"
-  - "Sentry"
-  - "Software Development"
-  - "Tech"
-  - "Typescript"
+  - Cloud function
+  - Expo
+  - Firebase
+  - GCP
+  - Native-base
+  - React-Native
+  - Sentry
+  - Software Development
+  - Tech
+  - Typescript
 ---
 Hi guys! Let’s start another technical post and this time I did something that I really enjoyed, it was an App that uses the famous OpeanIA, and the best part about everything, this app is a Flashcard app, so you can use that to learn a new language for example. For those who don’t know what is flashcards, it is a game that will help you to stick with those words, phrasal verbs, or even the meaning of them in your memory. I am going to link here, another article that explains much better than me how effective this kind of game is for learners.
 

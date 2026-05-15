@@ -1,20 +1,21 @@
 ---
-title: "Implementing an Auth Flow Fast with NestJS"
-excerpt: "The first step in a NestJS auth-flow series: project setup, CLI usage, SWC compilation, TypeScript target tuning, and Vercel deployment basics."
-coverImage: "/nestjs-ninja.png"
-date: "2023-10-06T12:00:00.000Z"
+title: Implementing an Auth Flow Fast with NestJS
+excerpt: >-
+  The first step in a NestJS auth-flow series: project setup, CLI usage, SWC
+  compilation, TypeScript target tuning, and Vercel deployment basics.
+coverImage: /blog-assets/nestjs-auth-flow-fast-start/cover.png
+date: '2023-10-06T12:00:00.000Z'
 author:
-  name: "Henrique Weiand"
-  picture: "/nestjs-ninja.png"
+  name: Henrique Weiand
+  picture: /nestjs-ninja.png
 ogImage:
-  url: "/nestjs-ninja.png"
+  url: /blog-assets/nestjs-auth-flow-fast-start/cover.png
 tags:
   - NestJS
   - Authentication
   - SWC
   - Vercel
 ---
-
 This post starts a small NestJS authentication series. It is based on my original Medium article, [Implementing auth flow as fast as possible using NestJS](https://medium.com/p/bdf87488bc00).
 
 The first part is not about JWT logic yet. It is about creating a solid project base quickly.

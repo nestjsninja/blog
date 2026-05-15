@@ -1,22 +1,27 @@
 ---
-title: "Applying integration test on NestJS with Jest and GitHub Actions"
-excerpt: "Hello fellow coders! Today we are going to talk a bit about tests inside NestJS, let’s start looking at and applying one type of test and later we are going to see another, so the first one will be e2e."
-coverImage: "/blog-assets/applying-integration-test-on-nestjs-with-jest-and-github-actions/untitled.png"
-date: "2023-10-16T12:00:00.000Z"
+title: Applying integration test on NestJS with Jest and GitHub Actions
+excerpt: >-
+  Hello fellow coders! Today we are going to talk a bit about tests inside
+  NestJS, let’s start looking at and applying one type of test and later we are
+  going to see another, so the first one will be e2e.
+coverImage: >-
+  /blog-assets/applying-integration-test-on-nestjs-with-jest-and-github-actions/cover.png
+date: '2023-10-16T12:00:00.000Z'
 author:
-  name: "Henrique Weiand"
-  picture: "/nestjs-ninja.png"
+  name: Henrique Weiand
+  picture: /nestjs-ninja.png
 ogImage:
-  url: "/blog-assets/applying-integration-test-on-nestjs-with-jest-and-github-actions/untitled.png"
+  url: >-
+    /blog-assets/applying-integration-test-on-nestjs-with-jest-and-github-actions/cover.png
 tags:
-  - "Jest"
-  - "NestJS"
-  - "Node.js"
-  - "Passion Economy"
-  - "SWC"
-  - "Tests"
-  - "Typescript"
-  - "auth"
+  - Jest
+  - NestJS
+  - Node.js
+  - Passion Economy
+  - SWC
+  - Tests
+  - Typescript
+  - auth
 ---
 Hello fellow coders! Today we are going to talk a bit about tests inside NestJS, let’s start looking at and applying one type of test and later we are going to see another, so the first one will be e2e. 
 

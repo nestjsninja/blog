@@ -1,20 +1,21 @@
 ---
-title: "Implementing auth flow as fast as possible using NestJS"
-excerpt: "Hey there, fellow coders! 🚀 Ready to dive into the world of authentication flows? Buckle up because we're about to take a turbo-charged ride with NestJS to implement auth flow faster than you can say \"password reset.\" I"
-coverImage: "/blog-assets/implementing-auth-flow-as-fast-as-possible-using-nestjs/screen-shot-2023-10-05-at-20-05-11.png"
-date: "2023-10-01T12:00:00.000Z"
+title: Implementing auth flow as fast as possible using NestJS
+excerpt: "Hey there, fellow coders! \U0001F680 Ready to dive into the world of authentication flows? Buckle up because we're about to take a turbo-charged ride with NestJS to implement auth flow faster than you can say \"password reset.\" I"
+coverImage: /blog-assets/implementing-auth-flow-as-fast-as-possible-using-nestjs/cover.png
+date: '2023-10-01T12:00:00.000Z'
 author:
-  name: "Henrique Weiand"
-  picture: "/nestjs-ninja.png"
+  name: Henrique Weiand
+  picture: /nestjs-ninja.png
 ogImage:
-  url: "/blog-assets/implementing-auth-flow-as-fast-as-possible-using-nestjs/screen-shot-2023-10-05-at-20-05-11.png"
+  url: >-
+    /blog-assets/implementing-auth-flow-as-fast-as-possible-using-nestjs/cover.png
 tags:
-  - "NestJS"
-  - "Node.js"
-  - "SWC"
-  - "Typescript"
-  - "Vercel"
-  - "auth"
+  - NestJS
+  - Node.js
+  - SWC
+  - Typescript
+  - Vercel
+  - auth
 ---
 Hey there, fellow coders! 🚀 Ready to dive into the world of authentication flows? Buckle up because we're about to take a turbo-charged ride with NestJS to implement auth flow faster than you can say "password reset." In this article, we're going to show you how to make authentication feel like a breeze. So grab your favorite coding snack, and let's get this authentication party started! 💻🎉
 

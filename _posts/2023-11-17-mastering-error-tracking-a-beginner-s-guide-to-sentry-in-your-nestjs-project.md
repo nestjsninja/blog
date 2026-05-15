@@ -1,18 +1,20 @@
 ---
-title: "Mastering Error Tracking: A Beginner's Guide to Sentry in Your NestJS Project"
-excerpt: "Hello fellow coders!"
-coverImage: "/blog-assets/mastering-error-tracking-a-beginner-s-guide-to-sentry-in-your-nestjs-project/screen-shot-2023-11-16-at-19-11-59.png"
-date: "2023-11-17T12:00:00.000Z"
+title: 'Mastering Error Tracking: A Beginner''s Guide to Sentry in Your NestJS Project'
+excerpt: Hello fellow coders!
+coverImage: >-
+  /blog-assets/mastering-error-tracking-a-beginner-s-guide-to-sentry-in-your-nestjs-project/cover.png
+date: '2023-11-17T12:00:00.000Z'
 author:
-  name: "Henrique Weiand"
-  picture: "/nestjs-ninja.png"
+  name: Henrique Weiand
+  picture: /nestjs-ninja.png
 ogImage:
-  url: "/blog-assets/mastering-error-tracking-a-beginner-s-guide-to-sentry-in-your-nestjs-project/screen-shot-2023-11-16-at-19-11-59.png"
+  url: >-
+    /blog-assets/mastering-error-tracking-a-beginner-s-guide-to-sentry-in-your-nestjs-project/cover.png
 tags:
-  - "NestJS"
-  - "SWC"
-  - "Sentry"
-  - "Typescript"
+  - NestJS
+  - SWC
+  - Sentry
+  - Typescript
 ---
 Hello fellow coders! 
 

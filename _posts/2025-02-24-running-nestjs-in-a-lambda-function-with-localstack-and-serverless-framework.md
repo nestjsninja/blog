@@ -1,19 +1,21 @@
 ---
-title: "Running NestJS in a Lambda function with LocalStack and Serverless Framework"
-excerpt: "Running NestJS in a Lambda function with LocalStack and Serverless Framework"
-coverImage: "/blog-assets/running-nestjs-in-a-lambda-function-with-localstack-and-serverless-framework/screenshot-2025-02-20-at-16-59-16.png"
-date: "2025-02-24T12:00:00.000Z"
+title: Running NestJS in a Lambda function with LocalStack and Serverless Framework
+excerpt: Running NestJS in a Lambda function with LocalStack and Serverless Framework
+coverImage: >-
+  /blog-assets/running-nestjs-in-a-lambda-function-with-localstack-and-serverless-framework/cover.png
+date: '2025-02-24T12:00:00.000Z'
 author:
-  name: "Henrique Weiand"
-  picture: "/nestjs-ninja.png"
+  name: Henrique Weiand
+  picture: /nestjs-ninja.png
 ogImage:
-  url: "/blog-assets/running-nestjs-in-a-lambda-function-with-localstack-and-serverless-framework/screenshot-2025-02-20-at-16-59-16.png"
+  url: >-
+    /blog-assets/running-nestjs-in-a-lambda-function-with-localstack-and-serverless-framework/cover.png
 tags:
-  - "AWS"
-  - "Lambda"
-  - "LocalStack"
-  - "NestJS"
-  - "Serverless"
+  - AWS
+  - Lambda
+  - LocalStack
+  - NestJS
+  - Serverless
 ---
 Hey there, tech enthusiasts! Ever found yourself needing a quick and efficient way to whip up QR codes for your projects? Well, in today's blog post, we will cover an awesome solution that brings together NestJS and AWS Lambda, all while keeping things super smooth with the Serverless Framework and LocalStack.
 

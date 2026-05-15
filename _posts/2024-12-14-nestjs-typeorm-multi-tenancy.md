@@ -1,17 +1,21 @@
 ---
-title: "NestJS TypeORM and Multi-Tenancy"
-excerpt: "A practical implementation of multi-tenancy using NestJS and TypeORM, managing multiple databases for customers, with features like database migrations and connection handling. Future improvements could include real-time database verification and a caching layer for better scalability."
-coverImage: "/blog-assets/nestjs-typeorm-multi-tenancy/types-of-multi-tenant-architecture-f.png"
-date: "2024-12-14T12:00:00.000Z"
+title: NestJS TypeORM and Multi-Tenancy
+excerpt: >-
+  A practical implementation of multi-tenancy using NestJS and TypeORM, managing
+  multiple databases for customers, with features like database migrations and
+  connection handling. Future improvements could include real-time database
+  verification and a caching layer for better scalability.
+coverImage: /blog-assets/nestjs-typeorm-multi-tenancy/cover.png
+date: '2024-12-14T12:00:00.000Z'
 author:
-  name: "Henrique Weiand"
-  picture: "/nestjs-ninja.png"
+  name: Henrique Weiand
+  picture: /nestjs-ninja.png
 ogImage:
-  url: "/blog-assets/nestjs-typeorm-multi-tenancy/types-of-multi-tenant-architecture-f.png"
+  url: /blog-assets/nestjs-typeorm-multi-tenancy/cover.png
 tags:
-  - "Multi-tenancy"
-  - "NestJS"
-  - "TypeORM"
+  - Multi-tenancy
+  - NestJS
+  - TypeORM
 ---
 Not so different from any other ordinary type of project, multi-tenancy is a software architecture that has been in place for quite a while, and as with any other approach, there are pros and cons. In this article, I plan to walk you through a simple solution I implemented to tackle basic architecture inside the universe of the NestJS framework with TypeORM.
 

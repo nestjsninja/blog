@@ -1,0 +1,29 @@
+#!/usr/bin/env sh
+set -e
+
+before="$(mktemp)"
+after="$(mktemp)"
+
+{
+  git status --porcelain -- _posts public/blog-assets
+  git diff --binary -- _posts public/blog-assets
+} > "$before"
+
+npm run covers:generate
+
+{
+  git status --porcelain -- _posts public/blog-assets
+  git diff --binary -- _posts public/blog-assets
+} > "$after"
+
+if ! cmp -s "$before" "$after"; then
+  rm -f "$before" "$after"
+  echo ""
+  echo "Cover generation changed post or asset files."
+  echo "Stage the generated cover image/frontmatter changes, then commit again."
+  exit 1
+fi
+
+rm -f "$before" "$after"
+
+npm run commit:check

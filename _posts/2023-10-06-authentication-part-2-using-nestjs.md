@@ -1,20 +1,23 @@
 ---
-title: "Authentication part 2 using NestJS"
-excerpt: "Hey there, fellow coders! Let's continue our NestJS auth flow, right? Today we are going to create the two main modules auth and user, they will be very simple just to go straight to the point."
-coverImage: "/blog-assets/authentication-part-2-using-nestjs/untitled.png"
-date: "2023-10-06T12:00:00.000Z"
+title: Authentication part 2 using NestJS
+excerpt: >-
+  Hey there, fellow coders! Let's continue our NestJS auth flow, right? Today we
+  are going to create the two main modules auth and user, they will be very
+  simple just to go straight to the point.
+coverImage: /blog-assets/authentication-part-2-using-nestjs/cover.png
+date: '2023-10-06T12:00:00.000Z'
 author:
-  name: "Henrique Weiand"
-  picture: "/nestjs-ninja.png"
+  name: Henrique Weiand
+  picture: /nestjs-ninja.png
 ogImage:
-  url: "/blog-assets/authentication-part-2-using-nestjs/untitled.png"
+  url: /blog-assets/authentication-part-2-using-nestjs/cover.png
 tags:
-  - "NestJS"
-  - "Node.js"
-  - "SWC"
-  - "Typescript"
-  - "Vercel"
-  - "auth"
+  - NestJS
+  - Node.js
+  - SWC
+  - Typescript
+  - Vercel
+  - auth
 ---
 Hey there, fellow coders! Let's continue our NestJS auth flow, right? Today we are going to create the two main modules `auth` and `user`, they will be very simple just to go straight to the point. 
 
