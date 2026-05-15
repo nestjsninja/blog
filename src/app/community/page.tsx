@@ -14,29 +14,29 @@ const contributionPaths = [
     title: "Share a project",
     description:
       "Send a NestJS project, architecture decision, integration, or bug you solved. Practical examples are the best source for new articles.",
-    href: "https://github.com/nestjsninja/blog/issues/new?title=Project%20idea%3A%20&body=Project%20link%3A%0AWhat%20problem%20does%20it%20solve%3F%0AWhat%20should%20the%20article%20explain%3F",
-    label: "Submit project idea",
+    href: "https://github.com/nestjsninja/blog/issues/new?template=share-a-project.yml",
+    label: "Open project form",
   },
   {
     title: "Suggest an article",
     description:
       "Ask for a topic you want explained: tests, modules, queues, authentication, deployment, observability, or anything around backend architecture.",
-    href: "https://github.com/nestjsninja/blog/issues/new?title=Article%20request%3A%20&body=Topic%3A%0AContext%3A%0AWhat%20would%20make%20this%20useful%3F",
-    label: "Request topic",
+    href: "https://github.com/nestjsninja/blog/issues/new?template=suggest-an-article.yml",
+    label: "Open article form",
   },
   {
     title: "Fix a post",
     description:
-      "Found a typo, broken link, outdated command, missing image, or confusing explanation? Open a small pull request with the correction.",
-    href: "https://github.com/nestjsninja/blog",
-    label: "Open repository",
+      "Found a typo, broken link, outdated command, missing image, or confusing explanation? Start with a correction form and follow up with a small pull request if you already have the fix.",
+    href: "https://github.com/nestjsninja/blog/issues/new?template=fix-a-post.yml",
+    label: "Open correction form",
   },
   {
     title: "Contribute code",
     description:
-      "Improve the reader experience, automation, quality gate, cover generation, or markdown rendering. Keep the changes focused and tested.",
-    href: "https://github.com/nestjsninja/blog/pulls",
-    label: "Create pull request",
+      "Improve the reader experience, automation, quality gate, cover generation, or markdown rendering. Open a focused proposal first, then send the tested pull request.",
+    href: "https://github.com/nestjsninja/blog/issues/new?template=contribute-code.yml",
+    label: "Open code form",
   },
 ];
 

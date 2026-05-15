@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Open repository
+    url: https://github.com/nestjsninja/blog
+    about: Browse the source code, existing posts, and open pull requests.
+  - name: Read the blog
+    url: https://www.nestjsninja.com/blog
+    about: Check published articles before opening a new request.

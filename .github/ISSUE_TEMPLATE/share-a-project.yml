@@ -1,0 +1,63 @@
+name: Share a project
+description: Suggest a real NestJS project, integration, architecture decision, or bug fix that could become an article.
+title: "Project idea: "
+labels: ["community", "content"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for sharing a practical example. The more concrete the context is, the easier it is to turn it into a useful article.
+
+  - type: input
+    id: project-link
+    attributes:
+      label: Project or repository link
+      description: Public repo, article, demo, or any reference that explains the project.
+      placeholder: https://github.com/your-org/your-project
+    validations:
+      required: false
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does it solve?
+      description: Describe the real use case or pain point.
+      placeholder: We needed to process background jobs with retries and tenant-aware queues.
+    validations:
+      required: true
+
+  - type: textarea
+    id: article-angle
+    attributes:
+      label: What should the article explain?
+      description: Tell us what readers would benefit from learning.
+      placeholder: Explain the module structure, queue setup, retry strategy, and how to test it.
+    validations:
+      required: true
+
+  - type: textarea
+    id: setup
+    attributes:
+      label: Required setup or dependencies
+      description: Mention Docker services, databases, queues, env vars, or external APIs.
+      placeholder: Postgres, Redis, Docker Compose, and two API keys.
+    validations:
+      required: false
+
+  - type: textarea
+    id: extra-context
+    attributes:
+      label: Extra context
+      description: Links, screenshots, commands, or anything else that helps.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Submission checklist
+      options:
+        - label: I shared a specific real-world problem or implementation.
+          required: true
+        - label: I mentioned the main services, dependencies, or setup details if they matter.
+          required: false

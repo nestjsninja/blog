@@ -1,0 +1,56 @@
+name: Fix a post
+description: Report a typo, broken link, outdated command, missing image, or unclear explanation in an existing article.
+title: "Post fix: "
+labels: ["community", "content", "bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form when you found something specific to correct in an existing post. If you already have a fix ready, you can mention that below and open a pull request afterward.
+
+  - type: input
+    id: post-url
+    attributes:
+      label: Post URL
+      description: Link to the article that needs the correction.
+      placeholder: https://www.nestjsninja.com/blog/2023-10-16-applying-integration-test-on-nestjs-with-jest-and-github-actions
+    validations:
+      required: true
+
+  - type: dropdown
+    id: issue-type
+    attributes:
+      label: What needs fixing?
+      options:
+        - Typo or grammar
+        - Broken link
+        - Outdated command or package
+        - Missing asset or screenshot
+        - Confusing explanation
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: current-content
+    attributes:
+      label: What is wrong today?
+      description: Quote the relevant part or describe the exact issue.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-fix
+    attributes:
+      label: Suggested fix
+      description: Write the corrected text, link, command, or clarification if you have it.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: follow-up
+    attributes:
+      label: Follow-up
+      options:
+        - label: I can open a pull request for this correction.
+          required: false

@@ -1,0 +1,52 @@
+name: Suggest an article
+description: Request a topic or scenario you want to see explained on the blog.
+title: "Article request: "
+labels: ["community", "content"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Article requests work best when they are tied to a real project, blocker, or implementation detail.
+
+  - type: input
+    id: topic
+    attributes:
+      label: Topic
+      description: A short title for the request.
+      placeholder: Testing NestJS modules with external providers
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: What are you building and where are you stuck?
+      placeholder: I am integrating a queue and need to test module wiring without booting the whole app.
+    validations:
+      required: true
+
+  - type: textarea
+    id: useful-outcome
+    attributes:
+      label: What would make this useful?
+      description: Be specific about the examples, code paths, or explanations you want.
+      placeholder: A repo example, module breakdown, and test strategy with Jest.
+    validations:
+      required: true
+
+  - type: textarea
+    id: references
+    attributes:
+      label: References
+      description: Related docs, repos, posts, or screenshots.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Submission checklist
+      options:
+        - label: I explained the practical scenario behind this request.
+          required: true
