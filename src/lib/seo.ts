@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://nestjs-ninja.com";
 const SITE_NAME = "NestJS Ninja";
 const DEFAULT_TITLE = "NestJS Ninja | Backend Architecture Notes";
 const DEFAULT_DESCRIPTION =
