@@ -4,7 +4,6 @@ import path from "node:path";
 const root = path.resolve(".");
 
 const nextConfig: NextConfig = {
-  output: "export",
   trailingSlash: true,
   turbopack: {
     root,

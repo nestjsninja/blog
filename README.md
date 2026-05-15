@@ -24,18 +24,20 @@ npm run lint
 npm run build
 ```
 
-The production build uses Next.js static export and writes deployable files to
-`out/`.
+The regular Next.js build is useful for local verification.
 
 ## Cloudflare Pages
 
 Use these settings:
 
 ```text
-Framework preset: Next.js (Static HTML Export)
-Build command: npm run build
-Build output directory: out
+Framework preset: Next.js
+Build command: npx @cloudflare/next-on-pages@1
+Build output directory: .vercel/output/static
 ```
+
+Enable the `nodejs_compat` compatibility flag for both production and preview
+environments. The same flag is also declared in `wrangler.toml`.
 
 Set this environment variable in Cloudflare Pages:
 
