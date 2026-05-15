@@ -28,7 +28,10 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     title: post.title,
     description: post.excerpt,
     path: `/blog/${post.slug}`,
-    image: { url: post.ogImage.url, alt: post.title },
+    image: {
+      url: `/blog/${post.slug}/opengraph-image`,
+      alt: post.title,
+    },
     publishedTime: new Date(post.date).toISOString(),
     modifiedTime: new Date(post.date).toISOString(),
     authors: [post.author.name],
