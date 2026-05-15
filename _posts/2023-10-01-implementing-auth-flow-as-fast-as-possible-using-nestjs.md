@@ -16,6 +16,8 @@ tags:
   - Typescript
   - Vercel
   - auth
+series: NestJS Auth Flow
+seriesOrder: 1
 ---
 Hey there, fellow coders! 🚀 Ready to dive into the world of authentication flows? Buckle up because we're about to take a turbo-charged ride with NestJS to implement auth flow faster than you can say "password reset." In this article, we're going to show you how to make authentication feel like a breeze. So grab your favorite coding snack, and let's get this authentication party started! 💻🎉
 

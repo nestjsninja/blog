@@ -21,6 +21,8 @@ tags:
   - Typescript
   - Vercel
   - auth
+series: NestJS Auth Flow
+seriesOrder: 3
 ---
 Hello fellow coders! Let's continue our series of NestJS auth flow implementations, and today we are going to add a database integration to keep users saved basically to work with the auth module. 
 

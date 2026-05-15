@@ -50,6 +50,9 @@ export default function RootLayout({
               <Link href="/blog" className="hover:text-violet-300">
                 Blog
               </Link>
+              <Link href="/community" className="hover:text-violet-300">
+                Community
+              </Link>
               <a
                 href="https://medium.com/nestjs-ninja"
                 target="_blank"

@@ -40,6 +40,30 @@ tags:
   - NestJS
 ```
 
+Optional series frontmatter enables previous/next navigation:
+
+```yaml
+series: "NestJS Auth Flow"
+seriesOrder: 1
+```
+
+## Reader Features
+
+Post pages include:
+
+- generated table of contents
+- reading progress bar
+- estimated reading time
+- copy buttons for code blocks
+- terminal styling for bash blocks
+- GitHub file-link expansion into code blocks
+- related posts by shared tags
+- optional series navigation
+- local article feedback controls
+
+The blog index includes client-side search across title, excerpt, tags, and post
+content.
+
 ## Cover Images
 
 Generate missing post cover images with:

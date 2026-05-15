@@ -1,8 +1,11 @@
-import Image from "next/image";
-import Link from "next/link";
 import { getAllPosts } from "@/lib/api";
+import {
+  readingTime,
+  stripMarkdownForSearch,
+} from "@/lib/post-reader";
 import { buildPageMetadata } from "@/lib/seo";
 import { blogJsonLd, serializeJsonLd } from "@/lib/structured-data";
+import BlogSearch from "./blog-search";
 
 export const metadata = buildPageMetadata({
   title: "Blog",
@@ -14,6 +17,23 @@ export const metadata = buildPageMetadata({
 
 export default function BlogIndex() {
   const posts = getAllPosts();
+  const searchablePosts = posts.map((post) => ({
+    coverImage: post.coverImage,
+    date: post.date,
+    excerpt: post.excerpt,
+    readingTime: readingTime(post.content),
+    searchText: [
+      post.title,
+      post.excerpt,
+      post.tags?.join(" "),
+      stripMarkdownForSearch(post.content),
+    ]
+      .join(" ")
+      .toLowerCase(),
+    slug: post.slug,
+    tags: post.tags,
+    title: post.title,
+  }));
 
   return (
     <main className="mx-auto w-full max-w-6xl px-5 py-14 text-zinc-100 sm:py-20">
@@ -34,57 +54,7 @@ export default function BlogIndex() {
         </p>
       </div>
 
-      <div className="grid gap-8">
-        {posts.map((post) => (
-          <article
-            key={post.slug}
-            className="grid gap-5 border-t border-white/10 pt-8 sm:grid-cols-[260px_1fr]"
-          >
-            <Link
-              href={`/blog/${post.slug}`}
-              className="group relative aspect-video overflow-hidden rounded-md bg-[#171026] ring-1 ring-white/10 sm:aspect-[4/3]"
-              aria-label={post.title}
-            >
-              <Image
-                src={post.coverImage}
-                alt={post.title}
-                fill
-                sizes="(min-width: 640px) 260px, 100vw"
-                className="object-cover transition duration-300 group-hover:scale-105"
-              />
-            </Link>
-            <div>
-              <time className="text-sm text-zinc-500" dateTime={post.date}>
-                {new Date(post.date).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </time>
-              <h2 className="mt-2 text-2xl font-semibold tracking-normal text-white">
-                <Link href={`/blog/${post.slug}`} className="hover:text-violet-300">
-                  {post.title}
-                </Link>
-              </h2>
-              <p className="mt-3 text-base leading-7 text-zinc-400">
-                {post.excerpt}
-              </p>
-              {post.tags?.length ? (
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {post.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-sm bg-violet-400/10 px-2.5 py-1 text-xs font-medium text-violet-200 ring-1 ring-violet-300/15"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              ) : null}
-            </div>
-          </article>
-        ))}
-      </div>
+      <BlogSearch posts={searchablePosts} />
     </main>
   );
 }

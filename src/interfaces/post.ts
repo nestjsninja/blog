@@ -21,5 +21,7 @@ export interface Post {
     url: string;
   };
   tags?: string[];
+  series?: string;
+  seriesOrder?: number;
   content: string;
 }

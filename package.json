@@ -11,8 +11,8 @@
     "covers:check": "node scripts/generate-cover-images.mjs --dry-run --check",
     "lint": "eslint",
     "prepare": "husky",
-    "test": "node --test",
-    "coverage": "node scripts/coverage-report.mjs",
+    "test": "node --import tsx --test",
+    "coverage": "node --import tsx scripts/coverage-report.mjs",
     "commit:check": "npm test && npm run lint && npm run build",
     "quality:gate": "node scripts/quality-gate.mjs"
   },
@@ -38,6 +38,7 @@
     "eslint-config-next": "16.2.6",
     "husky": "^9.1.7",
     "tailwindcss": "^4",
+    "tsx": "^4.22.0",
     "typescript": "^5"
   }
 }

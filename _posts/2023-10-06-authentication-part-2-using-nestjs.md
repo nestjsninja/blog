@@ -18,6 +18,8 @@ tags:
   - Typescript
   - Vercel
   - auth
+series: NestJS Auth Flow
+seriesOrder: 2
 ---
 Hey there, fellow coders! Let's continue our NestJS auth flow, right? Today we are going to create the two main modules `auth` and `user`, they will be very simple just to go straight to the point. 
 

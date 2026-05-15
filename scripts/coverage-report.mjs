@@ -56,7 +56,7 @@ export function parseCoverageOutput(output) {
 
 function runCoverage(cwd) {
   return new Promise((resolve) => {
-    const child = spawn("node", ["--test", "--experimental-test-coverage"], {
+    const child = spawn("node", ["--import", "tsx", "--test", "--experimental-test-coverage"], {
       cwd,
       shell: false,
       stdio: ["ignore", "pipe", "pipe"],
