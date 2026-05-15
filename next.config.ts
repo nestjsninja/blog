@@ -4,10 +4,13 @@ import path from "node:path";
 const root = path.resolve(".");
 
 const nextConfig: NextConfig = {
+  output: "export",
+  trailingSlash: true,
   turbopack: {
     root,
   },
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
