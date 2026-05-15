@@ -1,4 +1,10 @@
-# Henrique Weiand Blog
+# NestJS Ninja
+
+<a href="https://www.nestjsninja.com">
+  <img src="public/nestjs-ninja.png" alt="NestJS Ninja" width="96" />
+</a>
+
+[![Quality Gate](https://github.com/nestjsninja/blog/actions/workflows/quality-gate.yml/badge.svg)](https://github.com/nestjsninja/blog/actions/workflows/quality-gate.yml)
 
 A markdown-powered Next.js blog with static post generation, article metadata,
 JSON-LD, sitemap, robots.txt, and manifest support.
@@ -115,9 +121,10 @@ The regular Next.js build is useful for local verification.
 - the production build passes
 - `npm audit --audit-level=high` passes
 
-On pull requests, GitHub Actions also generates coverage on the base branch and
-the quality gate summary shows a baseline/current/delta table for line, branch,
-and function coverage.
+On pull requests, GitHub Actions generates baseline coverage from the PR base
+commit. On direct pushes to `main` or `master`, it generates baseline coverage
+from the previous commit on the branch. The quality gate summary then shows a
+baseline/current/delta table for line, branch, and function coverage.
 
 ## Git Hooks
 
