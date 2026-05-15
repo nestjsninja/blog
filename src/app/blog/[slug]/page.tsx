@@ -80,9 +80,8 @@ export default async function PostPage({ params }: Params) {
                 <a
                   key={item.id}
                   href={`#${item.id}`}
-                  className={`text-zinc-500 hover:text-violet-200 ${
-                    item.level === 3 ? "pl-3" : ""
-                  }`}
+                  className={`text-zinc-500 hover:text-violet-200 ${item.level === 3 ? "pl-3" : ""
+                    }`}
                 >
                   {item.title}
                 </a>
@@ -92,7 +91,7 @@ export default async function PostPage({ params }: Params) {
         ) : null}
       </aside>
 
-      <div>
+      <div className="min-w-0">
         <Link href="/blog" className="text-sm font-medium text-violet-300 hover:text-violet-100">
           Back to blog
         </Link>
@@ -172,9 +171,8 @@ export default async function PostPage({ params }: Params) {
                 <a
                   key={item.id}
                   href={`#${item.id}`}
-                  className={`text-sm text-zinc-400 hover:text-violet-200 ${
-                    item.level === 3 ? "pl-3" : ""
-                  }`}
+                  className={`text-sm text-zinc-400 hover:text-violet-200 ${item.level === 3 ? "pl-3" : ""
+                    }`}
                 >
                   {item.title}
                 </a>
@@ -183,63 +181,63 @@ export default async function PostPage({ params }: Params) {
           </details>
         ) : null}
 
-      <div
-        className={styles.markdown}
-        dangerouslySetInnerHTML={{ __html: content }}
-      />
-      <ArticleFeedback slug={post.slug} />
+        <div
+          className={styles.markdown}
+          dangerouslySetInnerHTML={{ __html: content }}
+        />
+        <ArticleFeedback slug={post.slug} />
 
-      {seriesNavigation ? (
-        <section className="mt-12 border-t border-white/10 pt-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-violet-300">
-            {seriesNavigation.name}
-          </p>
-          <div className="mt-4 grid gap-3 sm:grid-cols-2">
-            {seriesNavigation.previous ? (
-              <Link
-                href={`/blog/${seriesNavigation.previous.slug}`}
-                className="rounded-md border border-white/10 bg-white/[0.03] p-4 hover:border-violet-300/50"
-              >
-                <span className="text-xs text-zinc-500">Previous</span>
-                <p className="mt-1 font-semibold text-white">
-                  {seriesNavigation.previous.title}
-                </p>
-              </Link>
-            ) : null}
-            {seriesNavigation.next ? (
-              <Link
-                href={`/blog/${seriesNavigation.next.slug}`}
-                className="rounded-md border border-white/10 bg-white/[0.03] p-4 hover:border-violet-300/50"
-              >
-                <span className="text-xs text-zinc-500">Next</span>
-                <p className="mt-1 font-semibold text-white">
-                  {seriesNavigation.next.title}
-                </p>
-              </Link>
-            ) : null}
-          </div>
-        </section>
-      ) : null}
+        {seriesNavigation ? (
+          <section className="mt-12 border-t border-white/10 pt-8">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-violet-300">
+              {seriesNavigation.name}
+            </p>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              {seriesNavigation.previous ? (
+                <Link
+                  href={`/blog/${seriesNavigation.previous.slug}`}
+                  className="rounded-md border border-white/10 bg-white/[0.03] p-4 hover:border-violet-300/50"
+                >
+                  <span className="text-xs text-zinc-500">Previous</span>
+                  <p className="mt-1 font-semibold text-white">
+                    {seriesNavigation.previous.title}
+                  </p>
+                </Link>
+              ) : null}
+              {seriesNavigation.next ? (
+                <Link
+                  href={`/blog/${seriesNavigation.next.slug}`}
+                  className="rounded-md border border-white/10 bg-white/[0.03] p-4 hover:border-violet-300/50"
+                >
+                  <span className="text-xs text-zinc-500">Next</span>
+                  <p className="mt-1 font-semibold text-white">
+                    {seriesNavigation.next.title}
+                  </p>
+                </Link>
+              ) : null}
+            </div>
+          </section>
+        ) : null}
 
-      {relatedPosts.length ? (
-        <section className="mt-12 border-t border-white/10 pt-8">
-          <h2 className="text-xl font-semibold text-white">Related posts</h2>
-          <div className="mt-5 grid gap-4">
-            {relatedPosts.map((relatedPost) => (
-              <Link
-                key={relatedPost.slug}
-                href={`/blog/${relatedPost.slug}`}
-                className="rounded-md border border-white/10 bg-white/[0.03] p-4 hover:border-violet-300/50"
-              >
-                <p className="font-semibold text-white">{relatedPost.title}</p>
-                <p className="mt-2 text-sm leading-6 text-zinc-500">
-                  {relatedPost.excerpt}
-                </p>
-              </Link>
-            ))}
-          </div>
-        </section>
-      ) : null}
+        {relatedPosts.length ? (
+          <section className="mt-12 border-t border-white/10 pt-8">
+            <h2 className="text-xl font-semibold text-white">Related posts</h2>
+            <div className="mt-5 grid gap-4">
+              {relatedPosts.map((relatedPost) => (
+                <Link
+                  key={relatedPost.slug}
+                  href={`/blog/${relatedPost.slug}`}
+                  className="rounded-md border border-white/10 bg-white/[0.03] p-4 hover:border-violet-300/50"
+                >
+                  <p className="font-semibold text-white">{relatedPost.title}</p>
+                  <p className="mt-2 text-sm leading-6 text-zinc-500">
+                    {relatedPost.excerpt}
+                  </p>
+                </Link>
+              ))}
+            </div>
+          </section>
+        ) : null}
       </div>
 
       <aside className="hidden lg:block">
