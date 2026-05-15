@@ -98,6 +98,21 @@ function readCoverage(filePath) {
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
 }
 
+function missingBaselineNotice(baseline) {
+  const expectedBaseline =
+    process.env.QUALITY_GATE_EXPECT_BASELINE === "true" ||
+    process.env.GITHUB_EVENT_NAME === "pull_request";
+
+  if (!expectedBaseline || baseline) {
+    return [];
+  }
+
+  return [
+    `_Baseline coverage was expected for this run but was not generated from ${baselineCoveragePath}._`,
+    "",
+  ];
+}
+
 function formatCoverage(value) {
   return typeof value === "number" ? `${value.toFixed(2)}%` : "n/a";
 }
@@ -139,6 +154,8 @@ export function coverageComparisonTable({ baseline, current }) {
 export function writeSummary(results) {
   const failed = results.filter((result) => result.code !== 0);
   const status = failed.length === 0 ? "✅ Passed" : "❌ Failed";
+  const baselineCoverage = readCoverage(baselineCoveragePath);
+  const currentCoverage = readCoverage(currentCoveragePath);
   const summary = [
     `# Quality Gate`,
     "",
@@ -150,9 +167,10 @@ export function writeSummary(results) {
     "",
     "## Coverage",
     "",
+    ...missingBaselineNotice(baselineCoverage),
     coverageComparisonTable({
-      baseline: readCoverage(baselineCoveragePath),
-      current: readCoverage(currentCoveragePath),
+      baseline: baselineCoverage,
+      current: currentCoverage,
     }),
     "",
   ];

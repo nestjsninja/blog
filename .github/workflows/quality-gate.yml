@@ -40,11 +40,23 @@ jobs:
 
       - name: Generate baseline coverage
         if: github.event_name == 'pull_request'
-        continue-on-error: true
         run: |
-          git worktree add .baseline origin/${{ github.base_ref }}
+          git worktree add --detach .baseline ${{ github.event.pull_request.base.sha }}
           npm ci --prefix .baseline
           node scripts/coverage-report.mjs --cwd .baseline --json .coverage/baseline.json
 
+      - name: Generate push baseline coverage
+        if: github.event_name == 'push' && github.event.before != '0000000000000000000000000000000000000000'
+        run: |
+          git worktree add --detach .baseline ${{ github.event.before }}
+          npm ci --prefix .baseline
+          node scripts/coverage-report.mjs --cwd .baseline --json .coverage/baseline.json
+
+      - name: Remove baseline worktree
+        if: always() && (github.event_name == 'pull_request' || (github.event_name == 'push' && github.event.before != '0000000000000000000000000000000000000000'))
+        run: git worktree remove --force .baseline
+
       - name: Run quality gate
+        env:
+          QUALITY_GATE_EXPECT_BASELINE: ${{ github.event_name == 'pull_request' || (github.event_name == 'push' && github.event.before != '0000000000000000000000000000000000000000') }}
         run: npm run quality:gate
