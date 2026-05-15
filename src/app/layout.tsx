@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
+import Script from "next/script";
 import "highlight.js/styles/github-dark.css";
 import "./globals.css";
 import { rootMetadata } from "@/lib/seo";
@@ -30,6 +31,20 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-JE1YY5LHF9"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-JE1YY5LHF9');
+          `}
+        </Script>
+      </head>
       <body className="flex min-h-full flex-col bg-[#0b0714] text-zinc-100">
         <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0b0714]/90 backdrop-blur">
           <nav className="mx-auto flex w-full max-w-6xl items-center justify-between px-5 py-3">
