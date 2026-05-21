@@ -182,6 +182,7 @@ export default async function PostPage({ params }: Params) {
         ) : null}
 
         <div
+          data-post-content="true"
           className={styles.markdown}
           dangerouslySetInnerHTML={{ __html: content }}
         />

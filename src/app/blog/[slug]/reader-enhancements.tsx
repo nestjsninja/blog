@@ -2,6 +2,11 @@
 
 import { useEffect, useState } from "react";
 
+type LightboxImage = {
+  alt: string;
+  src: string;
+};
+
 function labelForLanguage(pre: HTMLPreElement) {
   const code = pre.querySelector("code");
   const className = code?.className ?? "";
@@ -23,6 +28,7 @@ function sourceLabel(pre: HTMLPreElement) {
 
 export default function ReaderEnhancements() {
   const [progress, setProgress] = useState(0);
+  const [lightboxImage, setLightboxImage] = useState<LightboxImage | null>(null);
 
   useEffect(() => {
     const updateProgress = () => {
@@ -89,11 +95,87 @@ export default function ReaderEnhancements() {
     }
   }, []);
 
+  useEffect(() => {
+    const content = document.querySelector<HTMLElement>("[data-post-content]");
+
+    if (!content) {
+      return;
+    }
+
+    const openImage = (event: MouseEvent) => {
+      const image = (event.target as Element | null)?.closest("img");
+
+      if (!image || !content.contains(image)) {
+        return;
+      }
+
+      event.preventDefault();
+      setLightboxImage({
+        alt: image.getAttribute("alt") ?? "",
+        src: image.currentSrc || image.src,
+      });
+    };
+
+    content.addEventListener("click", openImage);
+
+    return () => {
+      content.removeEventListener("click", openImage);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!lightboxImage) {
+      return;
+    }
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setLightboxImage(null);
+      }
+    };
+
+    const originalOverflow = document.body.style.overflow;
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", closeOnEscape);
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [lightboxImage]);
+
   return (
-    <div
-      aria-hidden="true"
-      className="fixed left-0 top-0 z-[60] h-1 bg-violet-400 transition-[width] duration-150"
-      style={{ width: `${progress}%` }}
-    />
+    <>
+      <div
+        aria-hidden="true"
+        className="fixed left-0 top-0 z-[60] h-1 bg-violet-400 transition-[width] duration-150"
+        style={{ width: `${progress}%` }}
+      />
+
+      {lightboxImage ? (
+        <div
+          aria-modal="true"
+          className="fixed inset-0 z-[80] grid place-items-center bg-zinc-950/90 p-4 backdrop-blur-sm"
+          role="dialog"
+          onClick={() => setLightboxImage(null)}
+        >
+          <button
+            type="button"
+            className="absolute right-4 top-4 rounded-md border border-white/15 bg-white/10 px-3 py-2 text-sm font-semibold text-white hover:bg-white/20"
+            onClick={() => setLightboxImage(null)}
+          >
+            Close
+          </button>
+          {/* eslint-disable-next-line @next/next/no-img-element -- Markdown images can be external or generated HTML, so the lightbox uses the resolved browser source. */}
+          <img
+            src={lightboxImage.src}
+            alt={lightboxImage.alt}
+            className="max-h-[88vh] max-w-[94vw] rounded-md object-contain shadow-2xl ring-1 ring-white/15"
+            onClick={(event) => event.stopPropagation()}
+          />
+        </div>
+      ) : null}
+    </>
   );
 }
