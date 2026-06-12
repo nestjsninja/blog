@@ -1,5 +1,7 @@
 ---
-title: 'NestJS Authorization with CASL and TypeORM: Record-Level Permissions and Query Filtering'
+title: >-
+  NestJS Authorization with CASL and TypeORM: Record-Level Permissions and Query
+  Filtering
 excerpt: >-
   The TypeORM branch of the CASL conditions post. Same record-level idea, but
   with TypeORM: configure detectSubjectType once so entities need no subject()
