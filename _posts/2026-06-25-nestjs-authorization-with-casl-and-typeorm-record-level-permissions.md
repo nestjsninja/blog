@@ -38,6 +38,8 @@ So this is a small branch of that post for TypeORM users. The good news: almost 
 
 If you have not read the conditions post, start there. Here I will only highlight the TypeORM differences.
 
+💻 The full, runnable example is on GitHub: [nestjsninja/nestjs-authorization-casl-typeorm](https://github.com/nestjsninja/nestjs-authorization-casl-typeorm).
+
 ## What changes with TypeORM 🧠
 
 There is no official `@casl/typeorm` adapter (CASL ships `@casl/prisma` and `@casl/mongoose`, but not TypeORM). That sounds like bad news, but it only affects one thing: list filtering. Let me name the two differences up front.
