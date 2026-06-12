@@ -33,6 +33,8 @@ For the second question, I really like using [@casl/ability](https://casl.js.org
 
 This article is based on the idea behind an authorization module I worked with: one ability factory, one permission file per subject, a guard, and a small decorator to protect routes. I will rebuild that idea here from scratch with a generic example, so you can apply the same structure to your own project.
 
+💻 The full, runnable example is on GitHub: [nestjsninja/nestjs-authorization-casl](https://github.com/nestjsninja/nestjs-authorization-casl).
+
 ## The problem with role checks everywhere 🧠
 
 When a project starts, authorization usually looks like this:

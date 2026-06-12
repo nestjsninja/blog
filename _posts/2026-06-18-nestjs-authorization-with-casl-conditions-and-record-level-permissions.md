@@ -40,6 +40,8 @@ That third argument changes the whole game. It moves us from role-based ("editor
 
 If you have not read part 1, I recommend starting there, because we will reuse the exact same structure and only add conditions on top of it.
 
+💻 The full, runnable example is on GitHub: [nestjsninja/nestjs-authorization-casl-conditions](https://github.com/nestjsninja/nestjs-authorization-casl-conditions).
+
 ## What a condition actually is 🧠
 
 When you build an ability with `createMongoAbility` (which we did in part 1), CASL accepts a third argument that is a **MongoDB-style query object**. The rule only applies when the record matches that query.
