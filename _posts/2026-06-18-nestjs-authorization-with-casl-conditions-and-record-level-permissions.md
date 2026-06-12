@@ -26,7 +26,7 @@ ogImage:
 ---
 Hello, dev!
 
-In the [previous post](/posts/nestjs-authorization-with-casl-abilities-roles-and-guards) we built an authorization layer in NestJS with [@casl/ability](https://casl.js.org/): a `Role` enum, an `AuthorizationUser` that answers role questions, one permission file per subject, an `AbilityFactory`, and a guard with a `CheckAbility` decorator.
+In the [previous post](https://nestjs-ninja.com/blog/2026-06-11-nestjs-authorization-with-casl-abilities-roles-and-guards/) we built an authorization layer in NestJS with [@casl/ability](https://casl.js.org/): a `Role` enum, an `AuthorizationUser` that answers role questions, one permission file per subject, an `AbilityFactory`, and a guard with a `CheckAbility` decorator.
 
 Everything there was **role-based**. The rules answered questions like "can editors update articles?". And right at the end I left this line as a teaser:
 
@@ -227,7 +227,7 @@ export class ArticleService {
 }
 ```
 
-`throwUnlessCan` does exactly what it says: if the ability does not allow the action on that record, it throws a `ForbiddenError`. You can catch it in an exception filter and translate it into a NestJS `ForbiddenException` (we talked about that error-translation idea in the [architecture post](/posts/nestjs-architecture-dtos-services-transactions-and-boundaries)), or register CASL's error globally.
+`throwUnlessCan` does exactly what it says: if the ability does not allow the action on that record, it throws a `ForbiddenError`. You can catch it in an exception filter and translate it into a NestJS `ForbiddenException` (we talked about that error-translation idea in the [architecture post](https://nestjs-ninja.com/blog/2026-06-01-nestjs-architecture-dtos-services-transactions-and-boundaries/)), or register CASL's error globally.
 
 The key detail is `subject('Article', article)`. Without it, CASL would look at `article.constructor` and have no idea this plain object is an `Article`, so the condition would never match.
 
