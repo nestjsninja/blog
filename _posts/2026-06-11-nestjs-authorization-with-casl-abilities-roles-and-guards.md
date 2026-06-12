@@ -1,10 +1,9 @@
 ---
 title: 'NestJS Authorization with CASL: Roles, Abilities, and a Guard That Scales'
 excerpt: >-
-  A practical way to organize authorization in NestJS using @casl/ability:
-  typed actions and subjects, one permission file per subject, an ability
-  factory, and a guard with a CheckAbility decorator that keeps controllers
-  clean.
+  A practical way to organize authorization in NestJS using @casl/ability: typed
+  actions and subjects, one permission file per subject, an ability factory, and
+  a guard with a CheckAbility decorator that keeps controllers clean.
 date: '2026-06-11T12:00:00.000Z'
 author:
   name: Henrique Weiand
