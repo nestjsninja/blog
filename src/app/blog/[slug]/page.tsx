@@ -21,6 +21,14 @@ type Params = {
   params: Promise<{ slug: string }>;
 };
 
+// Force purely static output — no ISR prerender config.
+// @cloudflare/next-on-pages cannot process ISR configs and emits
+// "Invalid prerender config" warnings that cause ?_rsc= 404s during
+// client-side navigation. These two exports disable the dynamic fallback
+// and ISR, making the pages fully pre-rendered at build time.
+export const dynamicParams = false;
+export const dynamic = "force-static";
+
 export async function generateStaticParams() {
   return getAllPosts().map((post) => ({ slug: post.slug }));
 }
