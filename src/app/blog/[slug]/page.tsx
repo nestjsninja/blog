@@ -13,6 +13,7 @@ import {
 import { buildArticleMetadata } from "@/lib/seo";
 import { articleJsonLd, serializeJsonLd } from "@/lib/structured-data";
 import ArticleFeedback from "./article-feedback";
+import NewsletterSubscribe from "./newsletter-subscribe";
 import styles from "./post-body.module.css";
 import ReaderEnhancements from "./reader-enhancements";
 
@@ -187,6 +188,7 @@ export default async function PostPage({ params }: Params) {
           dangerouslySetInnerHTML={{ __html: content }}
         />
         <ArticleFeedback slug={post.slug} />
+        <NewsletterSubscribe />
 
         {seriesNavigation ? (
           <section className="mt-12 border-t border-white/10 pt-8">

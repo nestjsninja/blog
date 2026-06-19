@@ -2,6 +2,12 @@
 
 import { useSyncExternalStore } from "react";
 
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
 type ArticleFeedbackProps = {
   slug: string;
 };
@@ -11,17 +17,22 @@ export default function ArticleFeedback({ slug }: ArticleFeedbackProps) {
   const value = useSyncExternalStore(
     (onStoreChange) => {
       window.addEventListener(storageKey, onStoreChange);
-
       return () => window.removeEventListener(storageKey, onStoreChange);
     },
     () => window.localStorage.getItem(storageKey),
     () => null,
   );
 
-
   function choose(nextValue: string) {
     window.localStorage.setItem(storageKey, nextValue);
     window.dispatchEvent(new Event(storageKey));
+
+    // Send to GA4 so feedback is visible in Events > article_feedback.
+    // Custom dimensions: article_slug, feedback_value (Yes / Not yet).
+    window.gtag?.("event", "article_feedback", {
+      article_slug: slug,
+      feedback_value: nextValue,
+    });
   }
 
   return (
@@ -30,7 +41,7 @@ export default function ArticleFeedback({ slug }: ArticleFeedbackProps) {
         <div>
           <h2 className="text-lg font-semibold text-white">Was this helpful?</h2>
           <p className="mt-1 text-sm text-zinc-500">
-            Your answer stays in this browser for now.
+            {value ? "Thanks for the feedback." : "Let me know if this was useful."}
           </p>
         </div>
         <div className="flex gap-2">
