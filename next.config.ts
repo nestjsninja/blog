@@ -3,7 +3,11 @@ import path from "node:path";
 
 const root = path.resolve(".");
 
-const isProduction = process.env.VERCEL_ENV === "production";
+// Works on both Vercel and Cloudflare Pages.
+// On Cloudflare, CF_PAGES_BRANCH is set to the deployed branch name.
+const isProduction =
+  process.env.VERCEL_ENV === "production" ||
+  process.env.CF_PAGES_BRANCH === "main";
 
 // Old slugs (from the previous blog URL structure) → current slugs.
 // These were indexed by Google and must 301 to the canonical URLs.
