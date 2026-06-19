@@ -44,10 +44,16 @@ export const siteConfig = {
 
 export function absoluteUrl(pathOrUrl?: string) {
   if (!pathOrUrl) {
-    return SITE_URL;
+    return `${SITE_URL}/`;
   }
 
-  return new URL(pathOrUrl, SITE_URL).toString();
+  const url = new URL(pathOrUrl, SITE_URL);
+  // Keep trailing slashes consistent with next.config trailingSlash: true.
+  // Sitemap entries without trailing slashes cause an extra 301 per URL.
+  if (!url.pathname.endsWith("/") && !url.pathname.includes(".")) {
+    url.pathname += "/";
+  }
+  return url.toString();
 }
 
 function buildCanonical(path?: string) {
