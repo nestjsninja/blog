@@ -42,17 +42,25 @@ export const siteConfig = {
   description: DEFAULT_DESCRIPTION,
 };
 
+const FILE_EXTENSION_RE = /\.[a-z]{2,4}$/i;
+
 export function absoluteUrl(pathOrUrl?: string) {
   if (!pathOrUrl) {
     return `${SITE_URL}/`;
   }
 
   const url = new URL(pathOrUrl, SITE_URL);
-  // Keep trailing slashes consistent with next.config trailingSlash: true.
-  // Sitemap entries without trailing slashes cause an extra 301 per URL.
-  if (!url.pathname.endsWith("/") && !url.pathname.includes(".")) {
+
+  // Only add trailing slashes for local paths without file extensions.
+  // External URLs (e.g. Unsplash CDN) and asset paths (.png, .xml, .svg)
+  // must not be modified — their servers may not accept trailing slashes.
+  const isLocal = url.origin === SITE_URL;
+  const hasExtension = FILE_EXTENSION_RE.test(url.pathname);
+
+  if (isLocal && !hasExtension && !url.pathname.endsWith("/")) {
     url.pathname += "/";
   }
+
   return url.toString();
 }
 
@@ -61,7 +69,11 @@ function buildCanonical(path?: string) {
     return "/";
   }
 
-  return path.startsWith("/") ? path : `/${path}`;
+  // Ensure trailing slash matches next.config trailingSlash: true.
+  // Without this, the canonical tag points to a URL that 301-redirects,
+  // and Google may treat the non-slash version as a separate "alternate page".
+  const normalized = path.startsWith("/") ? path : `/${path}`;
+  return normalized.endsWith("/") ? normalized : `${normalized}/`;
 }
 
 function normalizeImage(image?: OgImageDescriptor) {
