@@ -2,3 +2,8 @@ name = "blog-ds0"
 pages_build_output_dir = ".vercel/output/static"
 compatibility_date = "2026-05-15"
 compatibility_flags = ["nodejs_compat"]
+
+[vars]
+RESEND_AUDIENCE_ID = "26bfdf60-c75c-42c0-bf69-b1b647f115b4"
+# RESEND_API_KEY is a secret — set it via:
+#   wrangler pages secret put RESEND_API_KEY --project-name blog-ds0
