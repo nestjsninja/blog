@@ -58,24 +58,23 @@ export const STORAGE_SERVICE = Symbol('STORAGE_SERVICE');
 
 Symbols are the right default for feature-module tokens.
 
-### `InjectionToken<T>`
+### Typed Symbol tokens
 
-`InjectionToken<T>` from `@nestjs/common` carries a generic type parameter. Editors can infer the resolved value at injection sites — autocomplete works, and type mismatches are caught at compile time:
+NestJS does not ship an instantiable `InjectionToken` class (unlike Angular). The `InjectionToken<T>` export from `@nestjs/common` is a **type alias** — `string | symbol | Type<T> | ...` — not something you can `new` up. For typed tokens, annotate the `const` with `unique symbol` and add the generic at the `@Inject()` call site:
 
 ```ts
 // config/app.config.ts
-import { InjectionToken } from '@nestjs/common';
-
 export interface AppConfig {
   apiKey: string;
   apiUrl: string;
   environment: 'development' | 'production' | 'test';
 }
 
-export const APP_CONFIG = new InjectionToken<AppConfig>('APP_CONFIG');
+// unique symbol ensures this token cannot be accidentally widened to `symbol`
+export const APP_CONFIG: unique symbol = Symbol('APP_CONFIG');
 ```
 
-The string argument (`'APP_CONFIG'`) shows up in error messages. Make it descriptive.
+The type safety comes from annotating `@Inject(APP_CONFIG) private readonly config: AppConfig` — TypeScript checks the declared type against what the container actually returns. The token itself is just a unique key.
 
 ### Custom `@Inject` decorators
 
