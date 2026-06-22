@@ -1,5 +1,7 @@
 ---
-title: 'NestJS Custom Providers: useValue, useClass, useFactory, and useExisting in the Real World'
+title: >-
+  NestJS Custom Providers: useValue, useClass, useFactory, and useExisting in
+  the Real World
 excerpt: >-
   The official docs show you the four provider shapes. This post shows you when
   to reach for each one in production code — typed injection tokens, async
@@ -14,13 +16,15 @@ tags:
   - TypeScript
   - Dependency Injection
   - Software Development
-coverImage: /blog-assets/nestjs-custom-providers-usevalue-useclass-usefactory-useexisting/cover.png
+coverImage: >-
+  /blog-assets/nestjs-custom-providers-usevalue-useclass-usefactory-useexisting/cover.png
 ogImage:
-  url: /blog-assets/nestjs-custom-providers-usevalue-useclass-usefactory-useexisting/cover.png
+  url: >-
+    /blog-assets/nestjs-custom-providers-usevalue-useclass-usefactory-useexisting/cover.png
 ---
 Hello, dev!
 
-The NestJS documentation introduces four provider shapes. You have probably read them — `useValue`, `useClass`, `useFactory`, `useExisting`. You know they exist. But knowing their names is different from knowing *when to reach for each one*, or what they look like beyond a contrived example.
+The NestJS documentation introduces four provider shapes. You have probably read them — `useValue`, `useClass`, `useFactory`, `useExisting`. You know they exist. But knowing their names is different from knowing _when to reach for each one_, or what they look like beyond a contrived example.
 
 Today we go past the docs. We build a checkout system — config loading, file storage, email delivery, payment gateways, and fan-out notifications — and every piece is wired together with custom providers. By the end you will have a clear mental model for the full provider API.
 
@@ -32,16 +36,16 @@ Today we go past the docs. We build a checkout system — config loading, file s
 
 Every provider in NestJS is a **token–value pair**. NestJS stores this pair in a module-scoped container. When a class declares `@Inject(TOKEN)` in its constructor, the container resolves the token and hands back the value.
 
-The four provider shapes are four different ways to describe the *value side* of that pair:
+The four provider shapes are four different ways to describe the _value side_ of that pair:
 
-| Shape | Produces the value by… |
-|---|---|
-| `useValue` | using a pre-built value you hand over directly |
-| `useClass` | instantiating a class (with its own DI-resolved dependencies) |
-| `useFactory` | calling a function that returns the value (can be `async`) |
-| `useExisting` | aliasing an already-registered token to a new one |
+| Shape         | Produces the value by…                                        |
+| ------------- | ------------------------------------------------------------- |
+| `useValue`    | using a pre-built value you hand over directly                |
+| `useClass`    | instantiating a class (with its own DI-resolved dependencies) |
+| `useFactory`  | calling a function that returns the value (can be `async`)    |
+| `useExisting` | aliasing an already-registered token to a new one             |
 
-The *token side* — the thing you inject — deserves as much attention as the value side. That is where we start.
+The _token side_ — the thing you inject — deserves as much attention as the value side. That is where we start.
 
 ## Injection tokens: the DI contract 🔑
 
@@ -49,11 +53,11 @@ The docs use strings for tokens: `provide: 'CONNECTION'`. Strings work, but they
 
 ### Symbol tokens
 
-A `Symbol` is unique by identity. Two `Symbol('STORAGE_SERVICE')` calls produce two *different* symbols, which eliminates naming collisions across modules:
+A `Symbol` is unique by identity. Two `Symbol('STORAGE_SERVICE')` calls produce two _different_ symbols, which eliminates naming collisions across modules:
 
 ```ts
 // storage/storage.constants.ts
-export const STORAGE_SERVICE = Symbol('STORAGE_SERVICE');
+export const STORAGE_SERVICE = Symbol("STORAGE_SERVICE");
 ```
 
 Symbols are the right default for feature-module tokens.
@@ -67,11 +71,11 @@ NestJS does not ship an instantiable `InjectionToken` class (unlike Angular). Th
 export interface AppConfig {
   apiKey: string;
   apiUrl: string;
-  environment: 'development' | 'production' | 'test';
+  environment: "development" | "production" | "test";
 }
 
 // unique symbol ensures this token cannot be accidentally widened to `symbol`
-export const APP_CONFIG: unique symbol = Symbol('APP_CONFIG');
+export const APP_CONFIG: unique symbol = Symbol("APP_CONFIG");
 ```
 
 The type safety comes from annotating `@Inject(APP_CONFIG) private readonly config: AppConfig` — TypeScript checks the declared type against what the container actually returns. The token itself is just a unique key.
@@ -82,9 +86,9 @@ When you end up typing `@Inject(STORAGE_SERVICE)` at every injection site, wrap 
 
 ```ts
 // storage/storage.constants.ts
-import { Inject } from '@nestjs/common';
+import { Inject } from "@nestjs/common";
 
-export const STORAGE_SERVICE = Symbol('STORAGE_SERVICE');
+export const STORAGE_SERVICE = Symbol("STORAGE_SERVICE");
 
 export const InjectStorage = (): ParameterDecorator => Inject(STORAGE_SERVICE);
 ```
@@ -120,9 +124,10 @@ Instead of reaching for `process.env.API_KEY` in every service, register a typed
     {
       provide: APP_CONFIG,
       useValue: {
-        apiKey: process.env.API_KEY ?? 'dev-key',
-        apiUrl: process.env.API_URL ?? 'http://localhost:3000',
-        environment: (process.env.NODE_ENV as AppConfig['environment']) ?? 'development',
+        apiKey: process.env.API_KEY ?? "dev-key",
+        apiUrl: process.env.API_URL ?? "http://localhost:3000",
+        environment:
+          (process.env.NODE_ENV as AppConfig["environment"]) ?? "development",
       } satisfies AppConfig,
     },
   ],
@@ -189,7 +194,7 @@ NestJS ships three tokens from `@nestjs/core` — `APP_PIPE`, `APP_GUARD`, `APP_
     },
     {
       provide: APP_GUARD,
-      useClass: AuthGuard,  // note: useClass works here too
+      useClass: AuthGuard, // note: useClass works here too
     },
   ],
 })
@@ -227,7 +232,7 @@ Two concrete implementations:
 @Injectable()
 export class LocalStorageService implements StorageService {
   async upload(filename: string, buffer: Buffer): Promise<string> {
-    const path = join(process.cwd(), 'uploads', filename);
+    const path = join(process.cwd(), "uploads", filename);
     await writeFile(path, buffer);
     return path;
   }
@@ -240,7 +245,13 @@ export class LocalStorageService implements StorageService {
 @Injectable()
 export class S3StorageService implements StorageService {
   async upload(filename: string, buffer: Buffer): Promise<string> {
-    await this.s3.send(new PutObjectCommand({ Bucket: this.bucket, Key: filename, Body: buffer }));
+    await this.s3.send(
+      new PutObjectCommand({
+        Bucket: this.bucket,
+        Key: filename,
+        Body: buffer,
+      }),
+    );
     return `https://${this.bucket}.s3.amazonaws.com/${filename}`;
   }
   // download, delete...
@@ -251,7 +262,7 @@ The module picks the class based on the environment — nowhere else in the code
 
 ```ts
 // storage/storage.module.ts
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === "production";
 
 @Module({
   providers: [
@@ -298,7 +309,7 @@ A Redis connection needs `await client.connect()` before it is ready. You cannot
 
 ```ts
 // cache/cache.module.ts
-export const REDIS_CLIENT = Symbol('REDIS_CLIENT');
+export const REDIS_CLIENT = Symbol("REDIS_CLIENT");
 
 @Module({
   providers: [
@@ -331,12 +342,12 @@ The `inject` array lists tokens whose resolved values are passed as arguments to
       provide: MAILER_SERVICE,
       useFactory: async (config: AppConfig) => {
         // Return a no-op mailer outside production to avoid real sends
-        if (config.environment !== 'production') {
+        if (config.environment !== "production") {
           return new NoopMailerService();
         }
         return new ResendMailerService(config.apiKey);
       },
-      inject: [APP_CONFIG],  // resolved and passed as the first argument
+      inject: [APP_CONFIG], // resolved and passed as the first argument
     },
   ],
   exports: [MAILER_SERVICE],
@@ -367,6 +378,7 @@ If initialization fits neatly in a class constructor — even with async work do
 ### A payment gateway with an alias
 
 `StripeGateway` is the concrete implementation. We want two tokens:
+
 - `StripeGateway` — for any code that is explicitly Stripe-aware
 - `PAYMENT_GATEWAY` — for code that only cares about the generic interface
 
@@ -420,7 +432,7 @@ Swapping from Stripe to Adyen later only requires touching `PaymentModule`. Ever
 
 ## Multi-provider arrays: the plugin system pattern 🔌
 
-The most powerful and least-documented pattern combines `useFactory` with an `inject` array to build a *collection* of providers under a single token. This is the exact mechanism NestJS uses internally for `APP_GUARD`, `APP_PIPE`, and `APP_INTERCEPTOR`.
+The most powerful and least-documented pattern combines `useFactory` with an `inject` array to build a _collection_ of providers under a single token. This is the exact mechanism NestJS uses internally for `APP_GUARD`, `APP_PIPE`, and `APP_INTERCEPTOR`.
 
 ### A pluggable notification system
 
@@ -440,7 +452,7 @@ The token that resolves to an array:
 
 ```ts
 // notification/notification.constants.ts
-export const NOTIFIERS = Symbol('NOTIFIERS');
+export const NOTIFIERS = Symbol("NOTIFIERS");
 ```
 
 Three independent implementations — each is a normal injectable class with its own dependencies:
@@ -448,18 +460,18 @@ Three independent implementations — each is a normal injectable class with its
 ```ts
 @Injectable()
 export class EmailNotifier implements Notifier {
-  readonly channel = 'email';
+  readonly channel = "email";
 
   constructor(@InjectMailer() private readonly mailer: MailerService) {}
 
   async send(message: string, recipient: string) {
-    await this.mailer.send(recipient, 'Notification', `<p>${message}</p>`);
+    await this.mailer.send(recipient, "Notification", `<p>${message}</p>`);
   }
 }
 
 @Injectable()
 export class SmsNotifier implements Notifier {
-  readonly channel = 'sms';
+  readonly channel = "sms";
 
   async send(message: string, recipient: string) {
     // await twilio.messages.create(...)
@@ -468,7 +480,7 @@ export class SmsNotifier implements Notifier {
 
 @Injectable()
 export class SlackNotifier implements Notifier {
-  readonly channel = 'slack';
+  readonly channel = "slack";
 
   async send(message: string, recipient: string) {
     // await slackClient.chat.postMessage(...)
@@ -513,7 +525,11 @@ export class NotificationService {
     await Promise.all(this.notifiers.map((n) => n.send(message, recipient)));
   }
 
-  async sendVia(channel: string, message: string, recipient: string): Promise<void> {
+  async sendVia(
+    channel: string,
+    message: string,
+    recipient: string,
+  ): Promise<void> {
     const notifier = this.notifiers.find((n) => n.channel === channel);
     if (!notifier) throw new Error(`No notifier for channel "${channel}"`);
     await notifier.send(message, recipient);
@@ -526,6 +542,7 @@ Adding a `PushNotifier` next sprint is purely additive: create the class, add it
 ### Why use a factory instead of `multi: true`?
 
 NestJS does support `multi: true`:
+
 ```ts
 { provide: NOTIFIERS, useClass: EmailNotifier, multi: true }
 { provide: NOTIFIERS, useClass: SmsNotifier, multi: true }
@@ -543,11 +560,11 @@ Here is how the checkout `AppModule` ties every provider shape together:
 // app.module.ts
 @Module({
   imports: [
-    ConfigModule,        // useValue      — typed AppConfig object from process.env
-    StorageModule,       // useClass      — S3StorageService in prod, LocalStorageService elsewhere
-    MailerModule,        // useFactory    — async; reads AppConfig, picks implementation
-    PaymentModule,       // useExisting   — PAYMENT_GATEWAY aliases StripeGateway singleton
-    NotificationModule,  // useFactory    — NOTIFIERS collects [email, sms, slack]
+    ConfigModule, // useValue      — typed AppConfig object from process.env
+    StorageModule, // useClass      — S3StorageService in prod, LocalStorageService elsewhere
+    MailerModule, // useFactory    — async; reads AppConfig, picks implementation
+    PaymentModule, // useExisting   — PAYMENT_GATEWAY aliases StripeGateway singleton
+    NotificationModule, // useFactory    — NOTIFIERS collects [email, sms, slack]
     CheckoutModule,
   ],
   providers: [
@@ -567,18 +584,28 @@ Each module encapsulates its provider decision. `AppModule` composes them withou
 @Injectable()
 export class CheckoutService {
   constructor(
-    @Inject(APP_CONFIG) private readonly config: AppConfig,        // useValue
+    @Inject(APP_CONFIG) private readonly config: AppConfig, // useValue
     @InjectPaymentGateway() private readonly gateway: PaymentGateway, // useExisting
-    @InjectStorage() private readonly storage: StorageService,      // useClass
-    private readonly notifications: NotificationService,             // useFactory array
+    @InjectStorage() private readonly storage: StorageService, // useClass
+    private readonly notifications: NotificationService, // useFactory array
   ) {}
 
-  async checkout(amount: number, currency: string, source: string, customerEmail: string) {
+  async checkout(
+    amount: number,
+    currency: string,
+    source: string,
+    customerEmail: string,
+  ) {
     const orderId = `ord_${Date.now()}`;
     const charge = await this.gateway.charge({ amount, currency, source });
 
-    const receipt = Buffer.from(JSON.stringify({ orderId, chargeId: charge.id }));
-    const receiptUrl = await this.storage.upload(`${orderId}-receipt.json`, receipt);
+    const receipt = Buffer.from(
+      JSON.stringify({ orderId, chargeId: charge.id }),
+    );
+    const receiptUrl = await this.storage.upload(
+      `${orderId}-receipt.json`,
+      receipt,
+    );
 
     await this.notifications.broadcast(
       `Order ${orderId} placed — ${amount} ${currency.toUpperCase()}`,
@@ -598,20 +625,20 @@ export class CheckoutService {
 
 **Provider shapes:**
 
-| Shape | Use when… |
-|---|---|
-| `useValue` | Pre-built value, SDK instances, `APP_PIPE`/`APP_GUARD`, config objects |
-| `useClass` | Environment-aware implementation swap, strategy pattern at module level |
-| `useFactory` | Async init, depends on other providers, returns a plain object |
-| `useExisting` | Aliasing — same instance, two names; backward-compat renames |
+| Shape         | Use when…                                                               |
+| ------------- | ----------------------------------------------------------------------- |
+| `useValue`    | Pre-built value, SDK instances, `APP_PIPE`/`APP_GUARD`, config objects  |
+| `useClass`    | Environment-aware implementation swap, strategy pattern at module level |
+| `useFactory`  | Async init, depends on other providers, returns a plain object          |
+| `useExisting` | Aliasing — same instance, two names; backward-compat renames            |
 
 **Injection tokens:**
 
-| Token type | When to use |
-|---|---|
-| `string` | Almost never — no type safety, global namespace |
-| `Symbol` | Feature module tokens, no cross-module collision |
-| `InjectionToken<T>` | When you want typed autocomplete at injection sites |
+| Token type            | When to use                                           |
+| --------------------- | ----------------------------------------------------- |
+| `string`              | Almost never — no type safety, global namespace       |
+| `Symbol`              | Feature module tokens, no cross-module collision      |
+| `InjectionToken<T>`   | When you want typed autocomplete at injection sites   |
 | Custom `@InjectXxx()` | When the token is used in more than one or two places |
 
 ---
