@@ -548,6 +548,53 @@ async function seed() {
 seed();
 ```
 
+## Shipping it: token-safe, automated releases
+
+A test-data library is only as trustworthy as the way it is built and shipped — so the release pipeline is worth a look, and it is a pattern you can lift for any package. The headline: **the npm token never touches a developer machine.** It lives as a single GitHub Actions secret.
+
+A release is two moves. First, locally, from a clean `main`:
+
+```bash
+npm run release   # or: npm run release -- --dry-run
+```
+
+[release-it](https://github.com/release-it/release-it) computes the next version from the conventional-commit history, writes `CHANGELOG.md`, commits, tags `v<version>`, and pushes. No npm or GitHub tokens are involved at this step.
+
+Second, pushing that tag triggers the publish workflow in CI:
+
+```yaml
+# .github/workflows/publish.yml
+on:
+  push:
+    tags: ['v*']
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # create the GitHub release
+      id-token: write # npm provenance
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+      - run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+```
+
+Two decisions make this solid:
+
+- **Publishing happens only on a `v*` tag.** Ordinary pushes to `main` run the test suites (including a job against a real PostgreSQL service container), but they never publish. A release is an explicit act, not a side effect of merging a PR.
+- **`--provenance`** attaches a signed, verifiable link from the published tarball back to the exact commit and workflow run that built it. It needs `id-token: write`, a `repository` field in `package.json`, and a public repo. (Forget the `repository` field and the publish fails — ask me how I know.)
+
+Around that, a husky pre-commit hook runs lint, type-check, and tests before anything is committed, and Renovate keeps dependencies current — while deliberately leaving the wide TypeORM peer range alone, for the very version-safety reason the library exists.
+
 ## Wrapping up
 
 The reason the TypeORM seeding story has been so rocky is a dependency pointed the wrong way: the seeding libraries depended on TypeORM's concrete, moving internals. Flip it — define a one-method port, make TypeORM a six-line adapter against a structural shape — and the coupling that kept breaking simply disappears.
