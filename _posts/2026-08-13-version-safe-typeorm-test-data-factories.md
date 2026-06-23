@@ -34,7 +34,11 @@ That second category is where seed data lives. And the TypeORM ecosystem has nev
 
 > Mocks answer "did my code call the database correctly?" Seed data answers "does my code work against a real one?"
 
-💻 The full, runnable library is on GitHub: [nestjsninja/typeorm-test-factory](https://github.com/nestjsninja/typeorm-test-factory).
+💻 The full, runnable library is on GitHub: [nestjsninja/typeorm-test-factory](https://github.com/nestjsninja/typeorm-test-factory). It is published on npm, so you can use everything in this post today:
+
+```bash
+npm install --save-dev typeorm-test-factory
+```
 
 ## The problem
 
@@ -555,5 +559,7 @@ The whole library is about 150 lines:
 - A six-line TypeORM adapter that imports nothing from TypeORM
 
 Define your defaults once, override only what each test cares about, and never pin your TypeORM version to keep your seeds alive again.
+
+It is on npm now — `npm install --save-dev typeorm-test-factory` — built and published from CI with provenance, and tested against real PostgreSQL on every push.
 
 💻 Full source with tests (including a real TypeORM + SQLite integration suite): [nestjsninja/typeorm-test-factory](https://github.com/nestjsninja/typeorm-test-factory)
