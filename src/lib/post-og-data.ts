@@ -9,6 +9,15 @@ export type PostOgData = {
 
 export const postOgData: PostOgData[] = [
   {
+    slug: "2026-08-20-nestjs-mapped-error-handling-domain-exceptions",
+    title: "Mapped Error Handling in NestJS: Base Exception, Domains, and One Filter",
+    excerpt:
+      "Build a layered error model: a base domain error with stable namespaced codes, per-domain exception families with typed constructors and cause-chaining, and a single global filter that renders any of them into one consistent, leak-free response.",
+    date: "2026-08-20T12:00:00.000Z",
+    author: "Henrique Weiand",
+    tags: ["NestJS", "TypeScript", "Error Handling", "Software Development"],
+  },
+  {
     slug: "2025-02-23-nestjs-lambda-localstack-serverless",
     title: "Running NestJS in Lambda with LocalStack and Serverless",
     excerpt:
