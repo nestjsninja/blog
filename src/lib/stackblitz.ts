@@ -18,10 +18,8 @@ const OWNED_OWNERS = new Set(["nestjsninja", "henriqueweiand"]);
 
 // Repos that depend on a native module (e.g. better-sqlite3) which StackBlitz's
 // in-browser WebContainers cannot build. The editor still opens for browsing.
-const NATIVE_DEP_REPOS = new Set([
-  "nestjsninja/typeorm-test-factory",
-  "nestjsninja/typeorm-test-factory-demo",
-]);
+// (The demo runs on sql.js, so it works in the browser and is not listed here.)
+const NATIVE_DEP_REPOS = new Set(["nestjsninja/typeorm-test-factory"]);
 
 export function stackblitzOpenUrl(owner: string, repo: string): string {
   return `https://stackblitz.com/github/${owner}/${repo}`;
