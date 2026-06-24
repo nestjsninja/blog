@@ -92,7 +92,9 @@ function RepoCard({ repo }: { repo: RepoRef }) {
         <div className="min-w-0">
           <p className="truncate font-mono text-sm text-white">{repo.slug}</p>
           <p className="mt-1 text-xs text-zinc-500">
-            Runs on StackBlitz WebContainers
+            {repo.nativeDeps
+              ? "Opens the code on StackBlitz"
+              : "Runs on StackBlitz WebContainers"}
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -102,7 +104,13 @@ function RepoCard({ repo }: { repo: RepoRef }) {
             className="rounded-md bg-violet-500/90 px-3 py-1.5 text-sm font-medium text-white hover:bg-violet-400"
             aria-expanded={open}
           >
-            {open ? "Hide preview" : "Run online"}
+            {repo.nativeDeps
+              ? open
+                ? "Hide editor"
+                : "Open editor"
+              : open
+                ? "Hide preview"
+                : "Run online"}
           </button>
           <a
             href={repo.openUrl}
@@ -125,17 +133,9 @@ function RepoCard({ repo }: { repo: RepoRef }) {
 
       {repo.nativeDeps ? (
         <p className="border-t border-white/10 px-4 py-2.5 text-xs text-amber-200/80">
-          Uses a native dependency (better-sqlite3) that StackBlitz can&apos;t
-          build in the browser — the editor opens for browsing the code; use{" "}
-          <a
-            href={repo.openUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="underline hover:text-white"
-          >
-            a new tab
-          </a>{" "}
-          or clone it to run.
+          This repo uses a native dependency StackBlitz can&apos;t build in the
+          browser, so it won&apos;t run here — the editor still opens for reading
+          the code. Clone it to run locally.
         </p>
       ) : null}
 
