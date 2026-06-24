@@ -522,6 +522,49 @@ describe('Users (e2e)', () => {
 
 A note on DI: factories are **test-only** infrastructure, so there is no reason to register the persister as a provider in your application module. Keep it in the test. (If you ever do need seeding inside the app — a dev-only seed endpoint, say — that is the moment to reach for a [custom provider with an injection token](https://nestjs-ninja.com/blog/2026-07-23-nestjs-custom-providers-usevalue-useclass-usefactory-useexisting/), exactly as we covered earlier in the series.)
 
+## Multiple and named DataSources
+
+Plenty of real apps talk to more than one database — a primary store and an analytics store, say. This is where the one-method port pays off again: a `Persister` wraps **one** source of repositories, so "multiple DataSources" is just "multiple persisters." Bind each factory to the persister for the database that owns its entity:
+
+```ts
+const accountFactory = defineFactory(Account)(
+  (f) => ({ email: `account${f.index}@test.dev` }),
+  typeormPersister(primaryDataSource),
+);
+const eventFactory = defineFactory(AnalyticsEvent)(
+  (f) => ({ name: `event-${f.index}` }),
+  typeormPersister(analyticsDataSource),
+);
+```
+
+In NestJS you resolve each connection by its token — the same `getDataSourceToken(name)` your providers use — and build a persister from it:
+
+```ts
+import { getDataSourceToken } from '@nestjs/typeorm';
+
+const primary = app.get<DataSource>(getDataSourceToken());            // default
+const analytics = app.get<DataSource>(getDataSourceToken('analytics')); // named
+
+const factories = bindFactories(typeormPersister(analytics), { event: eventFactory });
+```
+
+Isolation stays per-connection. Transactions don't span DataSources, so when you use the rollback pattern, open one context per connection and roll them all back:
+
+```ts
+let rollbacks: Array<() => Promise<void>>;
+
+beforeEach(async () => {
+  rollbacks = await Promise.all([
+    beginRollbackContext(primaryDataSource),
+    beginRollbackContext(analyticsDataSource),
+  ]);
+});
+
+afterEach(() => Promise.all(rollbacks.map((rollback) => rollback())));
+```
+
+A transaction in one DataSource can't roll back writes in another — they are independent connections. Cross-database atomicity is a distributed-transaction problem, outside a seeding library's scope.
+
 ## The same factories seed your dev database
 
 Because a factory is just "defaults + a persister", the same definitions you use in tests can populate a local or staging database from a script — no second seeding tool:
@@ -595,6 +638,35 @@ Two decisions make this solid:
 
 Around that, a husky pre-commit hook runs lint, type-check, and tests before anything is committed, and Renovate keeps dependencies current — while deliberately leaving the wide TypeORM peer range alone, for the very version-safety reason the library exists.
 
+## API reference
+
+The whole surface, in one place.
+
+**`defineFactory(Entity)(definition, persister?)`** — defines a factory. Curried so the entity type is captured first and the definition is type-checked precisely against it (literal/union columns included), while `create()` still returns the full entity. For string/name targets pass the type explicitly: `defineFactory<User>('users')(...)`. The `persister` is optional.
+
+**`definition(ctx)`** — your function returning the entity's default fields. `ctx` is a `FactoryContext` with `{ index }`, the zero-based position in a `makeMany`/`createMany` batch — use it for sequences. Any object-typed field may itself be a factory (a relation), resolved recursively.
+
+**Building entities**
+
+- `make(overrides?)` — build one entity in memory (no database, no id). Nested factories are built in memory too.
+- `makeMany(count, overrides?)` — build `count` in memory; `ctx.index` runs `0..count-1`.
+- `create(overrides?)` — persist one and return it with its id. Requires a bound persister; nested factories are persisted first and linked.
+- `createMany(count, overrides?)` — persist `count` (one `create` per row, so each gets its own relations).
+
+In all four, `overrides` win over the definition, and passing a real value for a relation field reuses it instead of creating a new row.
+
+**Binding a persister** (needed for `create`/`createMany`, never for `make`)
+
+- pass it to `defineFactory(Entity)(def, persister)`, or
+- `factory.withPersister(persister)` — returns a **new** bound copy (the idiomatic pattern: define factories unbound at module scope, bind per test), or
+- `bindFactories(persister, map)` — bind a whole map at once.
+
+**`with(overrides)`** — returns a new factory with the overrides folded into its defaults (a reusable "state"); the original is untouched.
+
+**`typeormPersister(source)`** — builds a `Persister` from a TypeORM `DataSource`/`EntityManager`/`Connection` via structural typing. The only place TypeORM is touched, and it imports nothing from `typeorm`.
+
+**`Factory.is(value)`** — a type guard for factory instances (how nested factories are detected). Exported types — `Persister`, `EntityTarget`, `RepositoryProvider`, `FactoryBuilder`, `FactoryDefinition`, `FactoryShape`, `FactoryContext` — let you annotate code or write your own adapter against the one-method port.
+
 ## Wrapping up
 
 The reason the TypeORM seeding story has been so rocky is a dependency pointed the wrong way: the seeding libraries depended on TypeORM's concrete, moving internals. Flip it — define a one-method port, make TypeORM a six-line adapter against a structural shape — and the coupling that kept breaking simply disappears.
@@ -610,3 +682,5 @@ Define your defaults once, override only what each test cares about, and never p
 It is on npm now — `npm install --save-dev typeorm-test-factory` — built and published from CI with provenance, and tested against real PostgreSQL on every push.
 
 💻 Full source with tests (including a real TypeORM + SQLite integration suite): [nestjsninja/typeorm-test-factory](https://github.com/nestjsninja/typeorm-test-factory)
+
+🧪 See it in a real app: [nestjsninja/typeorm-test-factory-demo](https://github.com/nestjsninja/typeorm-test-factory-demo) — a standalone NestJS application that installs the package from npm and exercises every feature across in-memory, integration, and e2e tests.
