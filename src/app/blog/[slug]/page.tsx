@@ -11,11 +11,13 @@ import {
   readingTime,
 } from "@/lib/post-reader";
 import { buildArticleMetadata } from "@/lib/seo";
+import { extractRepos } from "@/lib/stackblitz";
 import { articleJsonLd, serializeJsonLd } from "@/lib/structured-data";
 import ArticleFeedback from "./article-feedback";
 import NewsletterSubscribe from "./newsletter-subscribe";
 import styles from "./post-body.module.css";
 import ReaderEnhancements from "./reader-enhancements";
+import StackBlitzEmbeds from "./stackblitz-embeds";
 
 type Params = {
   params: Promise<{ slug: string }>;
@@ -67,6 +69,7 @@ export default async function PostPage({ params }: Params) {
 
   const posts = getAllPosts();
   const content = await markdownToHtml(post.content);
+  const repos = extractRepos(post.content);
   const toc = getTableOfContents(post.content);
   const relatedPosts = getRelatedPosts(post, posts);
   const seriesNavigation = getSeriesNavigation(post, posts);
@@ -195,6 +198,7 @@ export default async function PostPage({ params }: Params) {
           className={styles.markdown}
           dangerouslySetInnerHTML={{ __html: content }}
         />
+        <StackBlitzEmbeds repos={repos} />
         <ArticleFeedback slug={post.slug} />
         <NewsletterSubscribe />
 
