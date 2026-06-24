@@ -124,6 +124,26 @@ Typical article flow:
 6. Verification: commands, tests, screenshots, or expected behavior.
 7. Conclusion: practical takeaways and what could come next.
 
+### Database examples and StackBlitz
+
+Blog posts automatically render a "Run it in your browser" StackBlitz card for
+any linked `nestjsninja` (or `henriqueweiand`) repository. StackBlitz runs on
+WebContainers — an in-browser Node runtime that **cannot build native modules**.
+
+So whenever a post or its companion repo includes a database example, prefer
+drivers that run in the browser so the StackBlitz embed actually works:
+
+- For SQLite, use **sql.js** (TypeORM `type: 'sqljs'`, `autoSave: false` for
+  in-memory) instead of the native `better-sqlite3` / `sqlite3`.
+- Keep real PostgreSQL only where a server is available (e.g. CI), gated behind
+  an env var such as `POSTGRES_HOST`.
+- Avoid other native dependencies in runnable examples for the same reason
+  (e.g. prefer `bcryptjs` over `bcrypt`).
+
+If a companion repo genuinely needs a native module, it is fine — but note in
+the post that the StackBlitz embed opens the editor for browsing rather than
+running, and mark the repo in `NATIVE_DEP_REPOS` in `src/lib/stackblitz.ts`.
+
 Filename format:
 
 ```text

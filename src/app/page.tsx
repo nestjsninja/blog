@@ -21,7 +21,7 @@ export default function Home() {
   const yearsCovered = new Set(
     allPosts.map((post) => new Date(post.date).getFullYear()),
   ).size;
-  const topTags = Object.entries(
+  const tags = Object.entries(
     allPosts.reduce<Record<string, number>>((accumulator, post) => {
       for (const tag of post.tags ?? []) {
         accumulator[tag] = (accumulator[tag] ?? 0) + 1;
@@ -29,15 +29,13 @@ export default function Home() {
 
       return accumulator;
     }, {}),
-  )
-    .sort((left, right) => {
-      if (right[1] !== left[1]) {
-        return right[1] - left[1];
-      }
+  ).sort((left, right) => {
+    if (right[1] !== left[1]) {
+      return right[1] - left[1];
+    }
 
-      return left[0].localeCompare(right[0]);
-    })
-    .slice(0, 5);
+    return left[0].localeCompare(right[0]);
+  });
 
   return (
     <main className="bg-[#0b0714] text-zinc-100">
@@ -156,11 +154,11 @@ export class AppModule {}`}</code>
                 Browse archive
               </Link>
             </div>
-            <div className="mt-5 flex flex-wrap gap-3">
-              {topTags.map(([tag, count]) => (
+            <div className="mt-5 flex max-h-44 flex-wrap gap-3 overflow-y-auto pr-1">
+              {tags.map(([tag, count]) => (
                 <Link
                   key={tag}
-                  href="/blog"
+                  href={`/blog?tag=${encodeURIComponent(tag)}`}
                   className="rounded-full border border-violet-300/25 bg-violet-400/10 px-3 py-1.5 text-sm text-violet-100 hover:border-violet-200/50 hover:text-white"
                 >
                   {tag}

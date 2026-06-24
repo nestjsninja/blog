@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { filterPosts } from "@/lib/post-filter";
 
 export type SearchPost = {
   coverImage: string;
@@ -21,14 +22,29 @@ type BlogSearchProps = {
 
 export default function BlogSearch({ posts }: BlogSearchProps) {
   const [query, setQuery] = useState("");
-  const normalizedQuery = query.trim().toLowerCase();
-  const filteredPosts = useMemo(() => {
-    if (!normalizedQuery) {
-      return posts;
-    }
+  const [activeTag, setActiveTag] = useState<string | null>(null);
 
-    return posts.filter((post) => post.searchText.includes(normalizedQuery));
-  }, [normalizedQuery, posts]);
+  // Read ?tag= from the URL on mount (e.g. when arriving from the home page).
+  // Done in an effect (not a lazy initializer) so the server still renders the
+  // full list into static HTML for SEO, then the client narrows it after mount.
+  useEffect(() => {
+    const tag = new URLSearchParams(window.location.search).get("tag");
+    if (tag) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- syncing from the URL on mount
+      setActiveTag(tag);
+    }
+  }, []);
+
+  function selectTag(tag: string | null) {
+    setActiveTag(tag);
+    const url = tag ? `/blog?tag=${encodeURIComponent(tag)}` : "/blog";
+    window.history.replaceState(null, "", url);
+  }
+
+  const filteredPosts = useMemo(
+    () => filterPosts(posts, { query, tag: activeTag }),
+    [activeTag, query, posts],
+  );
 
   return (
     <>
@@ -44,9 +60,22 @@ export default function BlogSearch({ posts }: BlogSearchProps) {
           placeholder="Search by topic, tag, or code..."
           className="w-full rounded-md border border-white/10 bg-white/[0.03] px-4 py-3 text-base text-white outline-none placeholder:text-zinc-600 focus:border-violet-300/70"
         />
-        <p className="mt-2 text-sm text-zinc-500">
-          {filteredPosts.length} of {posts.length} posts
-        </p>
+        <div className="mt-2 flex flex-wrap items-center gap-3">
+          <p className="text-sm text-zinc-500">
+            {filteredPosts.length} of {posts.length} posts
+          </p>
+          {activeTag ? (
+            <button
+              type="button"
+              onClick={() => selectTag(null)}
+              className="inline-flex items-center gap-1.5 rounded-full bg-violet-500/90 px-3 py-1 text-xs font-medium text-white hover:bg-violet-400"
+            >
+              Tag: {activeTag}
+              <span aria-hidden="true">✕</span>
+              <span className="sr-only">Clear tag filter</span>
+            </button>
+          ) : null}
+        </div>
       </div>
 
       <div className="grid gap-8">
@@ -91,12 +120,19 @@ export default function BlogSearch({ posts }: BlogSearchProps) {
               {post.tags?.length ? (
                 <div className="mt-4 flex flex-wrap gap-2">
                   {post.tags.map((tag) => (
-                    <span
+                    <button
                       key={tag}
-                      className="rounded-sm bg-violet-400/10 px-2.5 py-1 text-xs font-medium text-violet-200 ring-1 ring-violet-300/15"
+                      type="button"
+                      onClick={() => selectTag(tag)}
+                      aria-pressed={tag === activeTag}
+                      className={`rounded-sm px-2.5 py-1 text-xs font-medium ring-1 transition ${
+                        tag === activeTag
+                          ? "bg-violet-500/90 text-white ring-violet-300/40"
+                          : "bg-violet-400/10 text-violet-200 ring-violet-300/15 hover:bg-violet-400/20 hover:text-white"
+                      }`}
                     >
                       {tag}
-                    </span>
+                    </button>
                   ))}
                 </div>
               ) : null}
