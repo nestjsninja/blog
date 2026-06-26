@@ -9,6 +9,15 @@ export type PostOgData = {
 
 export const postOgData: PostOgData[] = [
   {
+    slug: "2026-08-27-nestjs-validation-pipes-dtos",
+    title: "Validation in NestJS: Pipes, DTOs, and Errors That Fit Your API",
+    excerpt:
+      "Pipes are the front door of a NestJS request: transform and validate input before it reaches a service. Covers the ValidationPipe and DTOs, the options that matter, parsing and custom pipes, nested DTOs and mapped types, a Zod alternative, Swagger/OpenAPI from the same DTOs, and making validation failures fit your error shape.",
+    date: "2026-08-27T12:00:00.000Z",
+    author: "Henrique Weiand",
+    tags: ["NestJS", "TypeScript", "Validation", "Software Development"],
+  },
+  {
     slug: "2026-08-20-nestjs-mapped-error-handling-domain-exceptions",
     title: "Mapped Error Handling in NestJS: Base Exception, Domains, and One Filter",
     excerpt:
