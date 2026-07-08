@@ -7,7 +7,7 @@ excerpt: >-
   WireMock in Docker. File-based stubs, a stateful scenario that starts
   returning 429 after three calls, runtime switching through the __admin API,
   and network-level faults like connection resets and malformed responses.
-date: "2026-07-15T12:00:00.000Z"
+date: '2026-07-15T12:00:00.000Z'
 author:
   name: Henrique Weiand
   picture: /nestjs-ninja.png
@@ -20,11 +20,10 @@ tags:
   - API
   - WireMock
   - Docker
-coverImage: /
+coverImage: /blog-assets/mocking-external-apis-in-nestjs-with-wiremock/cover.png
 ogImage:
-  url: /
+  url: /blog-assets/mocking-external-apis-in-nestjs-with-wiremock/cover.png
 ---
-
 Hello, dev!
 
 In the [previous post](https://nestjs-ninja.com/blog/2026-07-08-mocking-external-apis-in-nestjs-with-mockoon/) we took a NestJS backend that depends on a fictional payment provider (AcmePay), isolated the provider behind a requester service, and ran the whole app against a Mockoon mock that could simulate 500s, 403s, 429 rate limiting, and slow responses — all triggered on demand.

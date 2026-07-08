@@ -7,7 +7,7 @@ excerpt: >-
   requester pattern where the provider base URL is a single env var, then point
   the whole app at a Mockoon mock that simulates happy paths, 500s, 403s, 429
   rate limiting, and slow responses — with the GUI and @mockoon/cli.
-date: "2026-07-08T12:00:00.000Z"
+date: '2026-07-08T12:00:00.000Z'
 author:
   name: Henrique Weiand
   picture: /nestjs-ninja.png
@@ -19,11 +19,10 @@ tags:
   - Mocks
   - API
   - Mockoon
-coverImage: /
+coverImage: /blog-assets/mocking-external-apis-in-nestjs-with-mockoon/cover.png
 ogImage:
-  url: /
+  url: /blog-assets/mocking-external-apis-in-nestjs-with-mockoon/cover.png
 ---
-
 Hello, dev!
 
 Almost every backend I have worked on depends on at least one API that belongs to someone else: a payment provider, a POS system, a shipping carrier, a CRM. And sooner or later the same problems show up. The provider's sandbox is down exactly when you want to demo. You cannot force it to return a 500 to see what your error handling does. You have no idea how your app behaves when the provider starts rate limiting you, because you (hopefully) never hit the limit in development. And running a load test against someone else's sandbox is a great way to get your credentials blocked.
@@ -194,21 +193,17 @@ export class ExternalApiErrorFilter implements ExceptionFilter {
 
     if (exception.code) {
       // A provider 401/403 is OUR misconfiguration, not the client's fault.
-      return response
-        .status(502)
-        .json({
-          statusCode: 502,
-          message: "The payment provider rejected the request.",
-        });
+      return response.status(502).json({
+        statusCode: 502,
+        message: "The payment provider rejected the request.",
+      });
     }
 
     // No status at all: timeout, connection reset, malformed response...
-    return response
-      .status(504)
-      .json({
-        statusCode: 504,
-        message: "The payment provider did not answer in time.",
-      });
+    return response.status(504).json({
+      statusCode: 504,
+      message: "The payment provider did not answer in time.",
+    });
   }
 }
 ```
