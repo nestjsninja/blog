@@ -27,6 +27,26 @@ export const postOgData: PostOgData[] = [
     tags: ["NestJS", "TypeScript", "Error Handling", "Software Development"],
   },
   {
+    slug: "2026-07-15-mocking-external-apis-in-nestjs-with-wiremock",
+    title:
+      "Mocking External APIs in NestJS (Part 2): Stateful Scenarios and Fault Injection with WireMock",
+    excerpt:
+      "Part 2 of mocking external APIs: the same NestJS backend, now pointed at WireMock in Docker. File-based stubs, a stateful scenario that starts returning 429 after three calls, runtime switching through the __admin API, and network-level faults like connection resets and malformed responses.",
+    date: "2026-07-15T12:00:00.000Z",
+    author: "Henrique Weiand",
+    tags: ["NestJS", "TypeScript", "Testing", "Mocks", "WireMock"],
+  },
+  {
+    slug: "2026-07-08-mocking-external-apis-in-nestjs-with-mockoon",
+    title:
+      "Mocking External APIs in NestJS (Part 1): Errors, Rate Limits, and Latency with Mockoon",
+    excerpt:
+      "Your backend depends on a third-party API you cannot control. We build a requester pattern where the provider base URL is a single env var, then point the whole app at a Mockoon mock that simulates happy paths, 500s, 403s, 429 rate limiting, and slow responses — with the GUI and @mockoon/cli.",
+    date: "2026-07-08T12:00:00.000Z",
+    author: "Henrique Weiand",
+    tags: ["NestJS", "TypeScript", "Testing", "Mocks", "Mockoon"],
+  },
+  {
     slug: "2025-02-23-nestjs-lambda-localstack-serverless",
     title: "Running NestJS in Lambda with LocalStack and Serverless",
     excerpt:

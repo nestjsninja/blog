@@ -16,10 +16,14 @@ export interface RepoRef {
 // third-party libraries or tools that posts reference in prose.
 const OWNED_OWNERS = new Set(["nestjsninja", "henriqueweiand"]);
 
-// Repos that depend on a native module (e.g. better-sqlite3) which StackBlitz's
-// in-browser WebContainers cannot build. The editor still opens for browsing.
+// Repos that depend on a native module (e.g. better-sqlite3) or external
+// runtimes (e.g. Docker/Java) which StackBlitz's in-browser WebContainers
+// cannot run. The editor still opens for browsing.
 // (The demo runs on sql.js, so it works in the browser and is not listed here.)
-const NATIVE_DEP_REPOS = new Set(["nestjsninja/typeorm-test-factory"]);
+const NATIVE_DEP_REPOS = new Set([
+  "nestjsninja/typeorm-test-factory",
+  "nestjsninja/nestjs-mocking-external-apis-wiremock",
+]);
 
 export function stackblitzOpenUrl(owner: string, repo: string): string {
   return `https://stackblitz.com/github/${owner}/${repo}`;
