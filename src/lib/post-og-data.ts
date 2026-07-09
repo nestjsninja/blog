@@ -9,6 +9,15 @@ export type PostOgData = {
 
 export const postOgData: PostOgData[] = [
   {
+    slug: "2026-09-03-nestjs-graphql-federation-apollo-subgraphs-gateway",
+    title: "GraphQL Federation in NestJS: Subgraphs, Entities, and a Gateway",
+    excerpt:
+      "One GraphQL schema, many NestJS services. We take a code-first GraphQL API and split it into Apollo Federation v2 subgraphs — a users service that owns the User entity, an orders service that extends it — composed by a gateway that plans queries across both without the client ever knowing.",
+    date: "2026-09-03T12:00:00.000Z",
+    author: "Henrique Weiand",
+    tags: ["NestJS", "TypeScript", "GraphQL", "Apollo Federation", "Microservices"],
+  },
+  {
     slug: "2026-08-27-nestjs-validation-pipes-dtos",
     title: "Validation in NestJS: Pipes, DTOs, and Errors That Fit Your API",
     excerpt:
