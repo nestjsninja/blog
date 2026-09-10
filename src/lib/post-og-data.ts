@@ -9,6 +9,23 @@ export type PostOgData = {
 
 export const postOgData: PostOgData[] = [
   {
+    slug: "2026-09-10-nestjs-jwt-public-private-keys-jwks",
+    title:
+      "Public and Private Keys in NestJS: Signing JWTs and Publishing a JWKS",
+    excerpt:
+      "How the keys an SSO provider generates actually work, built in NestJS: sign access tokens with a private key, publish the matching public key at /.well-known/jwks.json, verify every request against it, and let an outside service or the browser verify with nothing but the URL. Then hand the trusted claims to the CASL authorization layer.",
+    date: "2026-09-10T12:00:00.000Z",
+    author: "Henrique Weiand",
+    tags: [
+      "NestJS",
+      "Authentication",
+      "JWT",
+      "JWKS",
+      "Security",
+      "Typescript",
+    ],
+  },
+  {
     slug: "2026-09-03-nestjs-graphql-federation-apollo-subgraphs-gateway",
     title: "GraphQL Federation in NestJS: Subgraphs, Entities, and a Gateway",
     excerpt:
