@@ -4,7 +4,7 @@ This is a Next.js 16 App Router markdown blog for NestJS Ninja.
 
 ## Important Next.js Note
 
-This project uses Next.js `16.2.6`. APIs and conventions may differ from older
+This project uses Next.js `16.3.4`. APIs and conventions may differ from older
 Next.js versions. When unsure, read the local docs in `node_modules/next/dist/docs/`
 before changing route, metadata, image, or config behavior.
 
