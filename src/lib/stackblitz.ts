@@ -23,6 +23,7 @@ const OWNED_OWNERS = new Set(["nestjsninja", "henriqueweiand"]);
 const NATIVE_DEP_REPOS = new Set([
   "nestjsninja/typeorm-test-factory",
   "nestjsninja/nestjs-mocking-external-apis-wiremock",
+  "nestjsninja/nestjs-typeorm-locking-strategies",
 ]);
 
 export function stackblitzOpenUrl(owner: string, repo: string): string {

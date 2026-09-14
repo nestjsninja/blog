@@ -9,6 +9,23 @@ export type PostOgData = {
 
 export const postOgData: PostOgData[] = [
   {
+    slug: "2026-09-17-nestjs-typeorm-optimistic-pessimistic-locking-postgres",
+    title:
+      "Optimistic vs Pessimistic Locking in NestJS with TypeORM and Postgres",
+    excerpt:
+      "Two concurrent requests read the same row, both decide it is safe to write, and one silently overwrites the other. We reproduce that lost update on purpose, then fix it two ways in NestJS and TypeORM: SELECT ... FOR UPDATE inside a transaction, and a single conditional UPDATE guarded by a version column. Proven with real concurrent races against Postgres, not a mock.",
+    date: "2026-09-17T12:00:00.000Z",
+    author: "Henrique Weiand",
+    tags: [
+      "NestJS",
+      "TypeORM",
+      "PostgreSQL",
+      "Concurrency",
+      "Databases",
+      "Typescript",
+    ],
+  },
+  {
     slug: "2026-09-10-nestjs-jwt-public-private-keys-jwks",
     title:
       "Public and Private Keys in NestJS: Signing JWTs and Publishing a JWKS",
