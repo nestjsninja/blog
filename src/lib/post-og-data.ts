@@ -9,6 +9,15 @@ export type PostOgData = {
 
 export const postOgData: PostOgData[] = [
   {
+    slug: "2026-09-24-building-an-mcp-server-with-nestjs",
+    title: "Building an MCP Server with NestJS",
+    excerpt:
+      "An MCP server is how you hand your application to an AI client like Claude or ChatGPT without writing a chatbot. We build one on top of a normal NestJS service using @rekog/mcp-nest, expose tools, resources and prompts with Zod, and call every one of them with curl. Along the way we hit two things the README does not warn you about: your exceptions arrive at the model as \"Internal server error\", and your guards do not protect tools/list.",
+    date: "2026-09-24T12:00:00.000Z",
+    author: "Henrique Weiand",
+    tags: ["NestJS", "MCP", "AI", "Zod", "Typescript"],
+  },
+  {
     slug: "2026-09-17-nestjs-typeorm-optimistic-pessimistic-locking-postgres",
     title:
       "Optimistic vs Pessimistic Locking in NestJS with TypeORM and Postgres",
