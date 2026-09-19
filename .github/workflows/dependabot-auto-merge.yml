@@ -1,0 +1,50 @@
+# Auto-merges Dependabot pull requests that are patch-only.
+#
+# Added 2026-09-19 after GitHub silently paused Dependabot on this repository: its pull
+# requests had sat unmerged for months, two of them red only because the fixes had already
+# landed on main. Nothing was wrong with the configuration; the updates simply had no way of
+# getting in. This closes that loop for the boring updates so the interesting ones stay
+# visible.
+#
+# Deliberately patch-only. Minor and major bumps still wait for a human.
+#
+# Merging is via `--auto`, so GitHub holds the pull request until the required status checks
+# on main pass. That gate is the whole safety mechanism: without required checks, auto-merge
+# merges immediately.
+name: Dependabot auto-merge
+
+on:
+  pull_request:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-merge:
+    name: Auto-merge patch updates
+    runs-on: ubuntu-latest
+    if: github.actor == 'dependabot[bot]'
+    timeout-minutes: 5
+
+    steps:
+      - name: Fetch Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      # A grouped pull request reports every update type it contains, comma separated, so an
+      # exact match is what keeps a minor bump from riding along inside a patch group.
+      - name: Enable auto-merge for patch updates
+        if: steps.metadata.outputs.update-type == 'version-update:semver-patch'
+        run: gh pr merge --auto --squash "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Explain why a pull request was left alone
+        if: steps.metadata.outputs.update-type != 'version-update:semver-patch'
+        run: |
+          echo "Update type is '${{ steps.metadata.outputs.update-type }}', not patch-only."
+          echo "Leaving this pull request for manual review."
