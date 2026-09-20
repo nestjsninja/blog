@@ -4,10 +4,11 @@
 # never fails the pipeline: a search engine ping is not worth a red build, and the sitemap
 # keeps working whether or not this succeeds.
 #
-# What this can and cannot do is worth being precise about. IndexNow is a real push protocol,
-# but Google does not participate. Google has NO API for requesting indexing of an ordinary
-# page: the Indexing API is restricted to JobPosting and BroadcastEvent. The most that can be
-# automated for Google is resubmitting the sitemap, which is what this does.
+# IndexNow only: Bing, Yandex, Seznam, Naver. Google does not participate in IndexNow and has
+# no API for requesting indexing of an ordinary page, so there is nothing here for it. Search
+# Console showed Google re-reading the sitemap every few days on its own, so resubmitting it
+# would have been ceremony. An accurate lastmod is what helps Google, and the sitemap now
+# guarantees one.
 name: Notify search engines
 
 on:
@@ -57,7 +58,5 @@ jobs:
         env:
           NEXT_PUBLIC_SITE_URL: https://nestjs-ninja.com
           INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
-          GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
-          GSC_PROPERTY: ${{ vars.GSC_PROPERTY }}
         run: node scripts/ping-search-engines.mjs
         continue-on-error: true
