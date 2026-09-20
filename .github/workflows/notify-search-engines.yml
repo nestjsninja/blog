@@ -1,0 +1,63 @@
+# Tells search engines about new posts after they are live.
+#
+# Runs on a push to main that touches _posts, and can be triggered by hand. It deliberately
+# never fails the pipeline: a search engine ping is not worth a red build, and the sitemap
+# keeps working whether or not this succeeds.
+#
+# What this can and cannot do is worth being precise about. IndexNow is a real push protocol,
+# but Google does not participate. Google has NO API for requesting indexing of an ordinary
+# page: the Indexing API is restricted to JobPosting and BroadcastEvent. The most that can be
+# automated for Google is resubmitting the sitemap, which is what this does.
+name: Notify search engines
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "_posts/**"
+  workflow_dispatch:
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    # Give Cloudflare Pages time to finish deploying, so the URLs being announced actually
+    # resolve. Announcing a 404 is worse than announcing nothing.
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - name: Wait for the new post to be live
+        env:
+          SITE_URL: https://nestjs-ninja.com
+        run: |
+          newest=$(ls _posts/*.md | sort | tail -1 | xargs basename | sed 's/\.md$//')
+          url="$SITE_URL/blog/$newest/"
+          echo "Waiting for $url"
+
+          for attempt in $(seq 1 30); do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "$url" || echo 000)
+            echo "  attempt $attempt: HTTP $code"
+            [ "$code" = "200" ] && exit 0
+            sleep 20
+          done
+
+          echo "Still not live after 10 minutes; skipping the ping."
+          exit 1
+        continue-on-error: true
+
+      - name: Ping
+        env:
+          NEXT_PUBLIC_SITE_URL: https://nestjs-ninja.com
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+          GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
+          GSC_PROPERTY: ${{ vars.GSC_PROPERTY }}
+        run: node scripts/ping-search-engines.mjs
+        continue-on-error: true

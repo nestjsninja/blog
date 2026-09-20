@@ -5,11 +5,13 @@ const SITE_NAME = "NestJS Ninja";
 const DEFAULT_TITLE = "NestJS Ninja | Backend Architecture Notes";
 const DEFAULT_DESCRIPTION =
   "A markdown-powered blog about NestJS, backend architecture, TypeScript, and practical development workflows.";
+// Rendered by src/app/opengraph-image.tsx rather than hotlinked from a stock photo site,
+// so it is branded, cannot disappear, and is always exactly 1200x630.
 const DEFAULT_OG_IMAGE = {
-  url: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop",
+  url: "/opengraph-image",
   width: 1200,
   height: 630,
-  alt: "Code editor on a software engineering desk",
+  alt: "NestJS Ninja: backend lessons and architecture notes",
 };
 
 type OgImageDescriptor = {
@@ -37,9 +39,37 @@ type BuildArticleMetadataOptions = BuildMetadataOptions & {
 
 export const siteConfig = {
   url: SITE_URL,
+  // Public by design: IndexNow proves domain ownership by serving this same value at
+  // /<key>.txt, so it is not a secret and belongs in the repository next to that file.
+  indexNowKey: "30c5b27490ffe372b3b86d6ec198e746",
   name: SITE_NAME,
   title: DEFAULT_TITLE,
   description: DEFAULT_DESCRIPTION,
+};
+
+/**
+ * Result-preview directives, shared by every page.
+ *
+ * Without max-image-preview: large, Google shows a thumbnail instead of the post's generated
+ * cover. These have to be repeated on each page rather than set once on the root layout: page
+ * metadata that mentions `robots` at all replaces the parent's value, and an explicit
+ * `undefined` counts as mentioning it.
+ */
+const ROBOTS_DEFAULTS = {
+  index: true,
+  follow: true,
+  googleBot: {
+    index: true,
+    follow: true,
+    "max-image-preview": "large",
+    "max-snippet": -1,
+    "max-video-preview": -1,
+  },
+} as const;
+
+/** Feed discovery. Same reasoning: `alternates` is replaced wholesale by page metadata. */
+const FEED_ALTERNATES = {
+  "application/rss+xml": [{ url: "/rss.xml", title: `${SITE_NAME} RSS Feed` }],
 };
 
 const FILE_EXTENSION_RE = /\.[a-z]{2,4}$/i;
@@ -98,15 +128,20 @@ export const rootMetadata: Metadata = {
   creator: SITE_NAME,
   publisher: SITE_NAME,
   keywords: [
-    "software engineering",
-    "Next.js",
-    "React",
+    "NestJS",
+    "NestJS tutorial",
     "TypeScript",
+    "Node.js",
+    "backend architecture",
+    "TypeORM",
+    "software engineering",
     "developer blog",
   ],
   alternates: {
     canonical: "/",
+    types: FEED_ALTERNATES,
   },
+  robots: ROBOTS_DEFAULTS,
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -121,10 +156,6 @@ export const rootMetadata: Metadata = {
     title: DEFAULT_TITLE,
     description: DEFAULT_DESCRIPTION,
     images: [normalizeImage().url],
-  },
-  robots: {
-    index: true,
-    follow: true,
   },
   category: "technology",
 };
@@ -147,6 +178,7 @@ export function buildPageMetadata({
     keywords,
     alternates: {
       canonical: canonicalPath,
+      types: FEED_ALTERNATES,
     },
     openGraph: {
       type: "website",
@@ -162,13 +194,9 @@ export function buildPageMetadata({
       description: metaDescription,
       images: [ogImage.url],
     },
-    robots:
-      typeof noIndex === "boolean"
-        ? {
-            index: !noIndex,
-            follow: !noIndex,
-          }
-        : undefined,
+    robots: noIndex
+      ? { index: false, follow: false }
+      : ROBOTS_DEFAULTS,
   };
 }
 

@@ -12,7 +12,11 @@ import {
 } from "@/lib/post-reader";
 import { buildArticleMetadata } from "@/lib/seo";
 import { extractRepos } from "@/lib/stackblitz";
-import { articleJsonLd, serializeJsonLd } from "@/lib/structured-data";
+import {
+  articleJsonLd,
+  breadcrumbJsonLd,
+  serializeJsonLd,
+} from "@/lib/structured-data";
 import ArticleFeedback from "./article-feedback";
 import NewsletterSubscribe from "./newsletter-subscribe";
 import styles from "./post-body.module.css";
@@ -81,6 +85,12 @@ export default async function PostPage({ params }: Params) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleJsonLd(post)) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd(breadcrumbJsonLd(post)),
+        }}
       />
 
       <aside className="hidden lg:block">

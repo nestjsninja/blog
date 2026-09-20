@@ -31,22 +31,70 @@ export function blogJsonLd(posts: Post[]) {
 }
 
 export function articleJsonLd(post: Post) {
+  const url = absoluteUrl(`/blog/${post.slug}`);
+
   return {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    headline: post.title,
+    // Google truncates headlines past 110 characters in rich results.
+    headline: post.title.slice(0, 110),
     description: post.excerpt,
     image: absoluteUrl(post.ogImage.url),
     datePublished: post.date,
     dateModified: post.date,
+    inLanguage: "en",
     author: {
       "@type": "Person",
       name: post.author.name,
+      url: siteConfig.url,
     },
     publisher: {
-      "@type": "Person",
+      "@type": "Organization",
       name: siteConfig.name,
+      url: siteConfig.url,
+      logo: {
+        "@type": "ImageObject",
+        url: absoluteUrl("/nestjs-ninja.png"),
+      },
     },
-    mainEntityOfPage: absoluteUrl(`/blog/${post.slug}`),
+    isPartOf: {
+      "@type": "Blog",
+      name: `${siteConfig.name} Blog`,
+      url: absoluteUrl("/blog"),
+    },
+    ...(post.tags?.length
+      ? { keywords: post.tags.join(", "), articleSection: post.tags[0] }
+      : {}),
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": url,
+    },
+    url,
+  };
+}
+
+/**
+ * Breadcrumbs for a post.
+ *
+ * Google uses this to replace the bare URL in a search result with a Home > Blog > Title
+ * trail, which takes up more space and reads better. It is one of the cheapest structured-data
+ * wins available, and the site had none.
+ */
+export function breadcrumbJsonLd(post: Post) {
+  const trail = [
+    { name: "Home", item: absoluteUrl("/") },
+    { name: "Blog", item: absoluteUrl("/blog") },
+    { name: post.title, item: absoluteUrl(`/blog/${post.slug}`) },
+  ];
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: trail.map((entry, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: entry.name,
+      item: entry.item,
+    })),
   };
 }
