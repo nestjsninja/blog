@@ -1,12 +1,13 @@
 ---
 title: 'NestJS and LangChain: Agents, Tools and Structured Output'
 excerpt: >-
-  LangChain v1 inside a NestJS application, built as a real support API: the
-  model as an injectable provider, structured output with Zod, an LCEL drafting
-  chain, and an agent whose tools call your ordinary services. Plus the finding
-  that changed how I write this code: withStructuredOutput parses the reply but
-  does not validate it, so an invalid enum arrives typed and wrong. Every one of
-  the 19 tests runs without an API key.
+  LangChain v1 inside a NestJS application, built as a real support API: two
+  models behind injection tokens so switching vendor is an environment
+  variable, structured output with Zod, an LCEL drafting chain, cross-provider
+  fallback, and an agent whose tools call your ordinary services. Plus the
+  finding that changed how I write this code: withStructuredOutput parses the
+  reply but does not validate it, so an invalid enum arrives typed and wrong.
+  Every one of the 23 tests runs without an API key.
 date: '2026-10-01T12:00:00.000Z'
 author:
   name: Henrique Weiand
@@ -32,13 +33,16 @@ I am going to build a support API for a small shop: classify a ticket, draft a r
 
 > Before we start, versions matter a lot in this ecosystem. This is **LangChain v1** (`langchain` 1.5, `@langchain/core` 1.2), NestJS 12, Zod 4, Node 24. LangChain v1 renamed and moved enough that a v0 tutorial, or an AI assistant trained on one, will hand you code that does not compile. I hit that twice while writing this, and I will point out where.
 
-💻 The full, runnable project is on GitHub: [nestjsninja/nestjs-langchain](https://github.com/nestjsninja/nestjs-langchain). Every output in this post came out of it, and all 19 tests run in CI with no key and no network.
+💻 The full, runnable project is on GitHub: [nestjsninja/nestjs-langchain](https://github.com/nestjsninja/nestjs-langchain). Every output in this post came out of it, and all 23 tests run in CI with no key and no network.
 
 ## Setting the project up ⚙️
 
 ```bash
-npm install langchain @langchain/core @langchain/openai zod
+npm install langchain @langchain/core zod
 npm install @nestjs/config
+
+# one package per provider you actually want to use
+npm install @langchain/openai @langchain/anthropic
 ```
 
 That second line has a trap in it. `@nestjs/config` jumped straight from `4.x` to `12.x` to line up with the NestJS major version, so if you write `"^4.0.0"` by habit you get a package that only supports NestJS 10 and 11, and the install dies on a peer dependency conflict:
@@ -65,6 +69,21 @@ export const CHAT_MODEL = Symbol("CHAT_MODEL");
 
 ```ts
 // llm/llm.module.ts
+async function build(spec: string, apiKey: string | undefined): Promise<BaseChatModel> {
+  const [provider] = spec.split(":");
+
+  if (!apiKey) {
+    throw new Error(`No API key for provider "${provider}".`);
+  }
+
+  return initChatModel(spec, {
+    apiKey,
+    temperature: 0,
+    maxRetries: 2,
+    timeout: 30_000,
+  });
+}
+
 @Global()
 @Module({
   imports: [ConfigModule],
@@ -72,20 +91,9 @@ export const CHAT_MODEL = Symbol("CHAT_MODEL");
     {
       provide: CHAT_MODEL,
       inject: [ConfigService],
-      useFactory: (config: ConfigService): BaseChatModel => {
-        const apiKey = config.get<string>("OPENAI_API_KEY");
-
-        if (!apiKey) {
-          throw new Error("OPENAI_API_KEY is not set.");
-        }
-
-        return new ChatOpenAI({
-          apiKey,
-          model: config.get<string>("OPENAI_MODEL") ?? "gpt-4o-mini",
-          temperature: 0,
-          maxRetries: 2,
-          timeout: 30_000,
-        });
+      useFactory: (config: ConfigService) => {
+        const spec = config.get<string>("CHAT_MODEL_SPEC") ?? "openai:gpt-4o";
+        return build(spec, keyFor(spec, config));
       },
     },
   ],
@@ -94,19 +102,123 @@ export const CHAT_MODEL = Symbol("CHAT_MODEL");
 export class LlmModule {}
 ```
 
-Three things I would not skip:
+`initChatModel` is doing the interesting work there. You hand it a `"provider:model"` string, it reads the prefix, lazily imports that provider's package, and returns something implementing the same interface as everything else:
 
-- **The token is typed as `BaseChatModel`**, LangChain's provider-agnostic interface. Every provider's model implements it, and so does every fake. That one decision is what makes the testing section at the end possible.
-- **It throws at startup when the key is missing.** A missing key is a deployment mistake. Finding out at boot costs you a failed deploy; finding out lazily costs you a customer hitting a 500 at 2am.
+```bash
+CHAT_MODEL_SPEC=openai:gpt-4o
+CHAT_MODEL_SPEC=anthropic:claude-sonnet-4-5
+CHAT_MODEL_SPEC=google:gemini-2.0-flash
+```
+
+Changing provider is an environment variable. Not a refactor, not a new adapter, not a single edit inside `src/`.
+
+Three more things I would not skip:
+
+- **The token is typed as `BaseChatModel`**, LangChain's provider-agnostic interface. Every provider's model implements it, and so does every fake. That one decision is what makes both the next section and the testing section possible.
+- **It throws at startup when the key is missing.** A missing key is a deployment mistake. Finding out at boot costs you a failed deploy; finding out lazily costs you a customer hitting a 500 at 2am. The lazy import means the same is true of a missing *package*: `anthropic:...` without `@langchain/anthropic` installed fails at boot, which is exactly when you want to hear about it.
 - **`temperature: 0`.** Classification and extraction should give the same answer for the same ticket. Save the creativity for the part that writes prose.
 
-Now nothing else in the codebase ever names a provider:
+Now nothing else in the codebase ever names a vendor:
 
 ```ts
 constructor(@Inject(CHAT_MODEL) private readonly model: BaseChatModel) {}
 ```
 
-Swapping OpenAI for Anthropic is a change to one file.
+## Two models, because it is a per-job decision 🔀
+
+Once the model is a provider, an obvious question follows: why only one?
+
+Classifying a ticket into one of five categories and writing the sentence a customer actually reads are different jobs. One is cheap, mechanical and happens on every ticket. The other is worth paying for. Using one model for both means either overpaying for triage or under-delivering on the reply.
+
+So there are two tokens:
+
+```ts
+// llm/llm.tokens.ts
+export const CHAT_MODEL = Symbol("CHAT_MODEL");   // prose, agent reasoning
+export const FAST_MODEL = Symbol("FAST_MODEL");   // classification, routing
+```
+
+and each service asks for the one it needs:
+
+```ts
+// triage/triage.service.ts
+constructor(@Inject(FAST_MODEL) private readonly model: BaseChatModel) {}
+```
+
+Two environment variables, and they do not have to be the same vendor:
+
+```bash
+CHAT_MODEL_SPEC=anthropic:claude-sonnet-4-5
+FAST_MODEL_SPEC=openai:gpt-4o-mini
+```
+
+That is a real production setup, not a party trick: the good model where quality is visible to a customer, the cheap one on the hot path. And because both are `BaseChatModel`, no service in the application can tell which is which, or change if you swap them.
+
+Worth testing, since "which model did that actually use" is invisible at runtime. Give the two tokens different scripted replies and the assertion can only pass if the right one was called:
+
+```ts
+const smart = new FakeListChatModel({ responses: ["THIS IS THE EXPENSIVE MODEL"] });
+const fast = new FakeListChatModel({ responses: [TRIAGE_JSON] });
+
+const moduleRef = await Test.createTestingModule({ imports: [LlmModule], providers: [TriageService] })
+  .overrideProvider(CHAT_MODEL).useValue(smart)
+  .overrideProvider(FAST_MODEL).useValue(fast)
+  .compile();
+
+const result = await moduleRef.get(TriageService).triage("Where is my invoice?");
+
+assert.equal(result.category, "billing");   // only the fast model could have produced this
+```
+
+### Falling back when a provider has a bad day
+
+Here is where two providers earns its keep. Every Runnable has `withFallbacks`, so this is not model-specific machinery:
+
+```ts
+// reply/reply.service.ts
+const resilientModel = this.model.withFallbacks([this.fallbackModel]);
+
+this.chain = prompt.pipe(resilientModel).pipe(new StringOutputParser());
+```
+
+If the first model errors, rate-limits or times out, the same call is retried against the second. And since the two can be **different vendors**, that survives something no amount of retrying one endpoint will: OpenAI having an outage.
+
+The agent has its own version of the same idea:
+
+```ts
+middleware: [
+  this.auditMiddleware(customer),
+  modelFallbackMiddleware(this.fallbackModel),
+],
+```
+
+`modelFallbackMiddleware` is variadic, so you can hand it a whole chain of descending preferences. Both forms take `BaseChatModel`, which is the quiet reason any of this composes.
+
+I wanted proof rather than a nice-sounding paragraph, so the tests use a model that always throws:
+
+```ts
+class BrokenModel extends FakeListChatModel {
+  async _generate(): Promise<never> {
+    throw new Error("provider is having a bad day");
+  }
+}
+
+it("falls back to the second model when the first throws", async () => {
+  const service = new ReplyService(new BrokenModel(), new FakeListChatModel({
+    responses: ["rescued by the fallback"],
+  }));
+
+  assert.equal(await service.draft("Anything at all.", triage), "rescued by the fallback");
+});
+
+it("still fails when every model is down", async () => {
+  const service = new ReplyService(new BrokenModel(), new BrokenModel());
+
+  await assert.rejects(() => service.draft("Anything at all.", triage), /bad day/);
+});
+```
+
+That second test matters as much as the first. A fallback that silently swallows a total outage is worse than none, because you find out from your customers instead of your alerts.
 
 ## Structured output, and the bug I did not expect 🧩
 
@@ -461,13 +573,13 @@ const answer = await service.ask("ana", "Where is order A-1002?");
 assert.match(answer, /DH123|shipped|A-1002/);
 ```
 
-The scripted model asked for a tool, the tool really called `OrdersService`, and the result came back into the conversation. Nineteen tests, and the whole suite:
+The scripted model asked for a tool, the tool really called `OrdersService`, and the result came back into the conversation. Twenty-three tests, and the whole suite:
 
 ```text
-ℹ tests 19
-ℹ pass 19
+ℹ tests 23
+ℹ pass 23
 ℹ fail 0
-ℹ duration_ms 388.6
+ℹ duration_ms 365.1
 ```
 
 Under four hundred milliseconds, no key, no network, no cost, green in CI on every push. An LLM test suite that people will actually run.
@@ -484,11 +596,15 @@ The genuinely new skill is knowing where the seams are: that `withStructuredOutp
 
 If you want somewhere to go next, the obvious step is retrieval: put your own documents behind a tool and let the agent decide when to search them. That slots into the same `forCustomer` method, as one more `tool()` with one more Zod schema, which is a decent sign the shape of this is right.
 
-That is it for today. Clone the repo, run `npm test`, and watch nineteen tests exercise an agent for free.
+That is it for today. Clone the repo, run `npm test`, and watch twenty-three tests exercise an agent for free.
 
 ### Takeaways ✍️
 
 - Put the model behind an injection token typed as `BaseChatModel`. One factory owns provider, temperature and timeouts, and every test can swap it.
+- Build models with `initChatModel("provider:model")` rather than `new ChatOpenAI()`. Changing vendor becomes an environment variable, and the provider package is imported lazily, so a missing one fails at boot.
+- Use more than one model. Classification and customer-facing prose are different jobs at different prices, so give them separate tokens and let each service ask for what it needs.
+- Put the fallback across two **different providers**, with `withFallbacks` on a chain or `modelFallbackMiddleware` on an agent. Retrying the same endpoint does not survive that vendor being down.
+- Test which model was used, since it is invisible at runtime: give each token a different scripted reply. And test the all-models-down case, because a fallback that swallows a total outage is worse than none.
 - Throw at startup when the API key is missing. A deployment mistake should fail the deploy, not the first customer.
 - **`withStructuredOutput` parses but does not validate.** An invalid enum or a missing field arrives typed as your schema and wrong. Re-parse with Zod at the boundary.
 - `.describe()` on a Zod field is prompt, not documentation. It reaches the model as JSON Schema.

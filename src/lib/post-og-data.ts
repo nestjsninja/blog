@@ -12,7 +12,7 @@ export const postOgData: PostOgData[] = [
     slug: "2026-10-01-nestjs-and-langchain-agents-tools-structured-output",
     title: "NestJS and LangChain: Agents, Tools and Structured Output",
     excerpt:
-      "LangChain v1 inside a NestJS application, built as a real support API: the model as an injectable provider, structured output with Zod, an LCEL drafting chain, and an agent whose tools call your ordinary services. Plus the finding that changed how I write this code: withStructuredOutput parses the reply but does not validate it, so an invalid enum arrives typed and wrong. Every one of the 19 tests runs without an API key.",
+      "LangChain v1 inside a NestJS application, built as a real support API: two models behind injection tokens so switching vendor is an environment variable, structured output with Zod, an LCEL drafting chain, cross-provider fallback, and an agent whose tools call your ordinary services. Plus the finding that changed how I write this code: withStructuredOutput parses the reply but does not validate it, so an invalid enum arrives typed and wrong. Every one of the 23 tests runs without an API key.",
     date: "2026-10-01T12:00:00.000Z",
     author: "Henrique Weiand",
     tags: ["NestJS", "LangChain", "AI", "Zod", "Agents", "Typescript"],
