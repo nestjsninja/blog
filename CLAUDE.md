@@ -27,12 +27,9 @@ before changing route, metadata, image, or config behavior.
 - `src/lib/markdownToHtml.ts`: converts Markdown to HTML.
 - `src/lib/seo.ts`: shared metadata helpers and site config.
 - `src/lib/structured-data.ts`: JSON-LD helpers.
-- `src/lib/post-og-data.ts`: Edge-safe data used by generated social images.
 - `src/app/page.tsx`: homepage.
 - `src/app/blog/page.tsx`: blog index.
 - `src/app/blog/[slug]/page.tsx`: post page and article metadata.
-- `src/app/blog/[slug]/opengraph-image.tsx`: generated social share image.
-- `src/app/blog/[slug]/twitter-image.tsx`: generated Twitter image.
 - `src/app/sitemap.ts`, `src/app/robots.ts`, `src/app/manifest.ts`: SEO files.
 - `wrangler.toml`: Cloudflare Pages output and compatibility config.
 
@@ -73,10 +70,9 @@ When asked to turn a backlog item into a post:
 5. Add the required frontmatter.
 6. Use `/nestjs-ninja.png` for `coverImage`, `author.picture`, and
    `ogImage.url` unless the user provides a better local/public asset.
-7. Add the new slug to `src/lib/post-og-data.ts`.
-8. Keep the backlog file in place unless the user explicitly asks to move,
+7. Keep the backlog file in place unless the user explicitly asks to move,
    archive, or delete it.
-9. Run verification commands before finishing.
+8. Run verification commands before finishing.
 
 If a backlog file is ambiguous, make a reasonable article structure from the
 available notes and mention any assumptions in the final response.
@@ -169,11 +165,6 @@ tags:
 ---
 ```
 
-After adding a post, also update `src/lib/post-og-data.ts` with the same slug,
-title, excerpt, date, author, and tags. The generated Open Graph/Twitter image
-routes run on the Edge runtime for Cloudflare, so they cannot read Markdown from
-the filesystem.
-
 The route slug is the filename without `.md`, for example:
 
 ```text
@@ -183,21 +174,24 @@ _posts/2025-02-01-real-time-chat-with-nestjs-socket-io.md
 
 ## Social Sharing Images
 
-Each post has generated share images:
+A post shares with its own cover image:
 
 ```text
-/blog/[slug]/opengraph-image/
-/blog/[slug]/twitter-image/
+/blog-assets/<slug without the date prefix>/cover.png
 ```
 
-These routes use `next/og` and must export:
+`npm run covers:generate` writes those, one per post, all 1536x1024, and the
+post body already uses the same file. Nothing needs registering anywhere: the
+metadata in `src/app/blog/[slug]/page.tsx` derives the path from the slug.
 
-```ts
-export const runtime = "edge";
-```
+There used to be generated `opengraph-image`/`twitter-image` routes per post.
+They never worked on Cloudflare Pages — with `trailingSlash: true` the request
+redirects and the adapter returns `/blog/[slug]/opengraph-image/` with the
+segment unsubstituted, which 404s — so every post shared with no preview image
+at all. They were removed along with the edge-safe data module that fed them.
 
-Do not import `src/lib/api.ts`, `fs`, `gray-matter`, or any Node-only code into
-these image routes. Use `src/lib/post-og-data.ts` instead.
+The site-level `src/app/opengraph-image.tsx` has no dynamic segment, resolves
+correctly, and stays.
 
 ## Cloudflare Pages
 

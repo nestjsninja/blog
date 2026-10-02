@@ -119,7 +119,21 @@ const nextConfig: NextConfig = {
     ],
   },
   async redirects() {
-    return LEGACY_REDIRECTS.map((r) => ({ ...r, permanent: true }));
+    return [
+      // www serves the whole site at 200 rather than redirecting. Every page
+      // therefore exists at two addresses; the canonical tag points at the apex,
+      // which is why Search Console files ~116 pages under "alternate page with
+      // proper canonical tag". Honouring the canonical is the right outcome, but
+      // it costs a crawl of every duplicate to reach it. One redirect removes the
+      // duplicate set entirely.
+      {
+        source: "/:path*",
+        has: [{ type: "host" as const, value: "www.nestjs-ninja.com" }],
+        destination: "https://nestjs-ninja.com/:path*",
+        permanent: true,
+      },
+      ...LEGACY_REDIRECTS.map((r) => ({ ...r, permanent: true })),
+    ];
   },
   async headers() {
     return [

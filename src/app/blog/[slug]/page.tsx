@@ -51,8 +51,21 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     title: post.title,
     description: post.excerpt,
     path: `/blog/${post.slug}`,
+    // The post's own cover, not a generated card.
+    //
+    // The generated route was `/blog/<slug>/opengraph-image`, and on Cloudflare
+    // Pages it never resolved: with `trailingSlash: true` the request redirects
+    // and the adapter then hands back `/blog/[slug]/opengraph-image/` with the
+    // segment unsubstituted, which 404s. Every post has therefore been sharing
+    // with no preview image at all, on every platform, for as long as the site
+    // has been on Pages.
+    //
+    // Cover folders drop the date prefix that post slugs carry. Every post has
+    // one, and all of them are 1536x1024.
     image: {
-      url: `/blog/${post.slug}/opengraph-image`,
+      url: `/blog-assets/${post.slug.replace(/^\d{4}-\d{2}-\d{2}-/, "")}/cover.png`,
+      width: 1536,
+      height: 1024,
       alt: post.title,
     },
     publishedTime: new Date(post.date).toISOString(),
