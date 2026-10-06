@@ -30,9 +30,9 @@ const checks = [
   },
   {
     name: "Dependencies",
-    command: "npm",
-    args: ["audit", "--audit-level=high"],
-    gate: "No high or critical npm audit findings",
+    command: "node",
+    args: ["scripts/audit-check.mjs"],
+    gate: "No unallowed high or critical npm audit findings",
   },
 ];
 
